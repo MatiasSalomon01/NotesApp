@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class SidebarItem extends StatefulWidget {
   final String title;
   final IconData icon;
-  const SidebarItem({super.key, required this.title, required this.icon});
+  final Function onPressed;
+  const SidebarItem(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.onPressed});
 
   @override
   State<SidebarItem> createState() => _SidebarItemState();
@@ -22,6 +27,7 @@ class _SidebarItemState extends State<SidebarItem> {
           leading: Icon(widget.icon),
           title: Text(widget.title),
           horizontalTitleGap: 0,
+          onTap: () => widget.onPressed(),
         ),
       ),
     );
