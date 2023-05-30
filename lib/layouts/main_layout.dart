@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
-import 'package:notes_app/views/home_view.dart';
 import 'package:notes_app/widgets/header.dart';
 import 'package:notes_app/widgets/sidebar.dart';
 import 'package:provider/provider.dart';

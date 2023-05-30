@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/views.dart';
 
 class MainLayoutProvider extends ChangeNotifier {
   double _width = 210;
-  Widget _view = Container();
+  Widget _view = const BlankView();
 
   double get width => _width;
 
