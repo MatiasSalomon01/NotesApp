@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/widgets/title.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -13,12 +14,14 @@ class Header extends StatelessWidget {
       color: const Color(0xffE1E1E1),
       child: Row(
         children: [
-          if (size.width < 600)
+          if (size.width < 600) ...[
             IconButton(
               tooltip: 'Menu Lateral',
               onPressed: () {},
               icon: const Icon(Icons.menu),
             ),
+            const CustomTitle(),
+          ],
         ],
       ),
     );

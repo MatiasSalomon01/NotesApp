@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/layouts/widgets/widgets.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
 import 'package:notes_app/views/views.dart';
+import 'package:notes_app/widgets/title.dart';
 import 'package:provider/provider.dart';
 
 class SideBar extends StatelessWidget {
@@ -17,16 +18,8 @@ class SideBar extends StatelessWidget {
       width: 200,
       child: ListView(
         children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 20, top: 10),
-            child: const Center(
-              child: Text(
-                'Notes App',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
+          const CustomTitle(
+            margin: EdgeInsets.only(bottom: 20, top: 10),
           ),
           SidebarItem(
             title: 'Por Hacer',

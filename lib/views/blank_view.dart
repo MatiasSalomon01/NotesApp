@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BlankView extends StatelessWidget {
@@ -7,9 +6,7 @@ class BlankView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        child: Text('Blank View'),
-      ),
+      child: Container(),
     );
   }
 }
