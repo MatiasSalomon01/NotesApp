@@ -10,10 +10,11 @@ class AppState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => MainLayoutProvider(),
+          create: (context) => MainLayoutProvider(platform),
         )
       ],
       child: const MyApp(),

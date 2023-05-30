@@ -14,17 +14,40 @@ class MainLayout extends StatelessWidget {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xffF3F3F3),
-      body: Row(
+      body: Stack(
         children: [
-          if (size.width > 600) const SideBar(),
-          Expanded(
-            child: Column(
+          Row(
+            children: [
+              if (size.width > 600) const SideBar(),
+              Expanded(
+                child: Column(
+                  children: [
+                    const Header(),
+                    mainLayoutProvider.view,
+                  ],
+                ),
+              )
+            ],
+          ),
+          if (size.width < 600) ...{
+            // Container(
+            //   color: Colors.amber,
+            // ),
+            Row(
               children: [
-                const Header(),
-                mainLayoutProvider.view,
+                const SideBar(),
+                if (mainLayoutProvider.openSidebar)
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => mainLayoutProvider.openSidebar = false,
+                      child: Container(
+                        color: Colors.black45,
+                      ),
+                    ),
+                  )
               ],
-            ),
-          )
+            )
+          }
         ],
       ),
     );

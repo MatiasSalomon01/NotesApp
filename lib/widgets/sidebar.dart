@@ -15,15 +15,23 @@ class SideBar extends StatelessWidget {
     final mainLayoutProvider =
         Provider.of<MainLayoutProvider>(context, listen: false);
     mainLayoutProvider.changeViewTo(newView);
+    mainLayoutProvider.openSidebar = false;
     mainLayoutProvider.currentView = nameView;
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Container(
       color: const Color(0xffE1E1E1),
-      width: 200,
+      width: size.width > 600
+          ? 200
+          : mainLayoutProvider.openSidebar
+              ? mainLayoutProvider.platform == TargetPlatform.android
+                  ? 300
+                  : 200
+              : 0,
       child: ListView(
         children: [
           const CustomTitle(

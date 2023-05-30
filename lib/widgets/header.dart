@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/providers/main_layout_provider.dart';
 import 'package:notes_app/widgets/title.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -12,6 +13,7 @@ class Header extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final safeArea = MediaQuery.of(context).padding.top;
     final platform = Theme.of(context).platform;
+    final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Container(
       padding:
           (platform == TargetPlatform.android || platform == TargetPlatform.iOS)
@@ -28,7 +30,8 @@ class Header extends StatelessWidget {
             IconButton(
               tooltip: 'Menu Lateral',
               onPressed: () {
-                print(Theme.of(context).platform);
+                mainLayoutProvider.openSidebar =
+                    !mainLayoutProvider.openSidebar;
               },
               icon: const Icon(Icons.menu),
             ),

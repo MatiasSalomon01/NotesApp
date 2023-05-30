@@ -5,6 +5,10 @@ class MainLayoutProvider extends ChangeNotifier {
   double _width = 210;
   Widget _view = const BlankView();
   String _currentView = '';
+  bool _openSidebar = true;
+  late final TargetPlatform _platform;
+
+  MainLayoutProvider(this._platform);
 
   double get width => _width;
 
@@ -26,4 +30,13 @@ class MainLayoutProvider extends ChangeNotifier {
     _currentView = value;
     notifyListeners();
   }
+
+  bool get openSidebar => _openSidebar;
+
+  set openSidebar(bool value) {
+    _openSidebar = value;
+    notifyListeners();
+  }
+
+  TargetPlatform get platform => _platform;
 }
