@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/layouts/widgets/widgets.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
 import 'package:notes_app/views/views.dart';
@@ -9,6 +10,13 @@ class SideBar extends StatelessWidget {
   const SideBar({
     super.key,
   });
+
+  navigateTo(BuildContext context, Widget newView, String nameView) {
+    final mainLayoutProvider =
+        Provider.of<MainLayoutProvider>(context, listen: false);
+    mainLayoutProvider.changeViewTo(newView);
+    mainLayoutProvider.currentView = nameView;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +32,29 @@ class SideBar extends StatelessWidget {
           SidebarItem(
             title: 'Por Hacer',
             icon: Icons.today_outlined,
-            onPressed: () => mainLayoutProvider.changeViewTo(const TodoView()),
+            onPressed: () => navigateTo(context, const TodoView(), Routes.todo),
+            isActive: mainLayoutProvider.currentView == Routes.todo,
           ),
           SidebarItem(
             title: 'Notas',
             icon: Icons.notes_outlined,
-            onPressed: () => mainLayoutProvider.changeViewTo(const NotesView()),
+            onPressed: () =>
+                navigateTo(context, const NotesView(), Routes.notes),
+            isActive: mainLayoutProvider.currentView == Routes.notes,
           ),
           SidebarItem(
             title: 'Tareas',
             icon: Icons.home_work_outlined,
             onPressed: () =>
-                mainLayoutProvider.changeViewTo(const HomeworkView()),
+                navigateTo(context, const HomeworkView(), Routes.homework),
+            isActive: mainLayoutProvider.currentView == Routes.homework,
           ),
           SidebarItem(
             title: 'Recordar',
             icon: Icons.checklist_rtl_outlined,
             onPressed: () =>
-                mainLayoutProvider.changeViewTo(const ToRememberView()),
+                navigateTo(context, const ToRememberView(), Routes.toRemember),
+            isActive: mainLayoutProvider.currentView == Routes.toRemember,
           ),
         ],
       ),

@@ -12,6 +12,7 @@ class MainLayout extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Scaffold(
+      // extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xffF3F3F3),
       body: Row(
         children: [

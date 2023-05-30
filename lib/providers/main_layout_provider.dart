@@ -4,6 +4,7 @@ import 'package:notes_app/views/views.dart';
 class MainLayoutProvider extends ChangeNotifier {
   double _width = 210;
   Widget _view = const BlankView();
+  String _currentView = '';
 
   double get width => _width;
 
@@ -16,6 +17,13 @@ class MainLayoutProvider extends ChangeNotifier {
 
   changeViewTo(Widget newView) {
     _view = newView;
+    notifyListeners();
+  }
+
+  String get currentView => _currentView;
+
+  set currentView(String value) {
+    _currentView = value;
     notifyListeners();
   }
 }
