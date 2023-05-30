@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/views/views.dart';
 
 class MainLayoutProvider extends ChangeNotifier {
   double _width = 210;
-  Widget _view = const BlankView();
-  String _currentView = '';
+  Widget _view = const TodoView();
+  String _currentView = Routes.todo;
   bool _openSidebar = true;
   late final TargetPlatform _platform;
 
