@@ -9,41 +9,17 @@ class MainLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(),
-      // drawer: Drawer(),
       body: Row(
         children: [
-          (size.width) > 600 ? const SideBar() : Container(),
-          const Header(),
-        ],
-      ),
-    );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            color: Colors.amber,
-            child: Row(
-              children: [
-                IconButton(
-                  tooltip: 'Menu Lateral',
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
-                ),
+          if (size.width > 600) const SideBar(),
+          Expanded(
+            child: Column(
+              children: const [
+                Header(),
+                Body(),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
@@ -57,10 +33,49 @@ class SideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Container(
       color: Colors.grey,
-      width: 210,
+      width: 200,
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: 55,
+      color: Colors.amber,
+      child: Row(
+        children: [
+          if (size.width < 600)
+            IconButton(
+              tooltip: 'Menu Lateral',
+              onPressed: () {},
+              icon: const Icon(Icons.menu),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class Body extends StatelessWidget {
+  const Body({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: Colors.red,
+      ),
     );
   }
 }
