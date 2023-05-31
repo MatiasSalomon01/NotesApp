@@ -47,13 +47,13 @@ class Header extends StatelessWidget {
               onPressed: () {},
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.add,
                     color: Colors.black,
                   ),
                   Text(
                     mainLayoutProvider.addActionName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
