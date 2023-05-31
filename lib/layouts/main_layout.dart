@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
+import 'package:notes_app/widgets/header.dart';
+import 'package:notes_app/widgets/sidebar.dart';
 import 'package:provider/provider.dart';
 
 class MainLayout extends StatelessWidget {
@@ -8,59 +10,46 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Scaffold(
-      // appBar: AppBar(),
-      // drawer: Drawer(),
-      body: Row(
+      // extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xffF3F3F3),
+      body: Stack(
         children: [
-          (size.width) > 600 ? const SideBar() : Container(),
-          const Header(),
-        ],
-      ),
-    );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            color: Colors.amber,
-            child: Row(
-              children: [
-                IconButton(
-                  tooltip: 'Menu Lateral',
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
+          Row(
+            children: [
+              if (size.width > 600) const SideBar(),
+              Expanded(
+                child: Column(
+                  children: [
+                    const Header(),
+                    mainLayoutProvider.view,
+                  ],
                 ),
-              ],
-            ),
+              )
+            ],
           ),
+          if (size.width < 600) ...{
+            // Container(
+            //   color: Colors.amber,
+            // ),
+            Row(
+              children: [
+                const SideBar(),
+                if (mainLayoutProvider.openSidebar)
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => mainLayoutProvider.openSidebar = false,
+                      child: Container(
+                        color: Colors.black45,
+                      ),
+                    ),
+                  )
+              ],
+            )
+          }
         ],
       ),
-    );
-  }
-}
-
-class SideBar extends StatelessWidget {
-  const SideBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
-    return Container(
-      color: Colors.grey,
-      width: 210,
     );
   }
 }
