@@ -27,6 +27,7 @@ class Header extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             if (size.width < 600) ...[
               IconButton(
@@ -38,7 +39,31 @@ class Header extends StatelessWidget {
               ),
               const CustomTitle(),
             ],
-            const Spacer(),
+            Container(
+              width: 180,
+              height: 30,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black38),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: TextFormField(
+                cursorColor: Colors.black,
+                initialValue: null,
+                scrollPadding: const EdgeInsets.all(0),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Buscar',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                  ),
+                  hintStyle: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ),
             TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
