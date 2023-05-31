@@ -22,9 +22,12 @@ class _TodoItemState extends State<TodoItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return IntrinsicHeight(
       child: Row(
         children: [
+          const VerticalDivider(
+            color: Colors.grey,
+          ),
           Checkbox(
             activeColor: Colors.black,
             value: activated,
