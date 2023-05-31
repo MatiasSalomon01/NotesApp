@@ -9,14 +9,23 @@ class TodoView extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: Listas.listas.length,
-          itemBuilder: (context, index) => TodoItem(
-              description: Listas.listas[index].descripcion!,
-              isCompleted: Listas.listas[index].isCompleted!),
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Creado el: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
+            ),
+            ListView.separated(
+              shrinkWrap: true,
+              itemCount: Listas.listas.length,
+              itemBuilder: (context, index) => TodoItem(
+                  description: Listas.listas[index].descripcion!,
+                  isCompleted: Listas.listas[index].isCompleted!),
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            ),
+          ],
         ),
       ),
     );
@@ -25,13 +34,13 @@ class TodoView extends StatelessWidget {
 
 class Listas {
   static final listas = [
-    PruebaTodo('Descripcion no te puede creer Loren', true),
-    PruebaTodo('Descripcion si te puede creer Loren', true),
-    PruebaTodo('Descripcion no te puede creer Loren', false),
-    PruebaTodo('Descripcion si te puede creer Loren', true),
-    PruebaTodo('LOREEEEEEEN ', false),
-    PruebaTodo('MI GOLFER', true),
-    PruebaTodo('jESSICA MAFIOSA', true),
+    PruebaTodo('Descripcion de tarea por hacer', true),
+    PruebaTodo('Descripcion de tarea por hacer', true),
+    PruebaTodo('Descripcion de tarea por hacer', false),
+    PruebaTodo('Descripcion de tarea por hacer', true),
+    PruebaTodo('Descripcion de tarea por hacer ', false),
+    PruebaTodo('Descripcion de tarea por hacer', true),
+    PruebaTodo('Descripcion de tarea por hacer', true),
   ];
 }
 
