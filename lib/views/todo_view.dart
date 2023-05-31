@@ -27,7 +27,7 @@ class TodoView extends StatelessWidget {
                               color: Colors.black26,
                             ),
                             Text(
-                              " Creado el: ${_Listas.dtoListas[index1].fecha}",
+                              " Creado el: ${_Listas.dtoListas[index1].fecha} - ${_Listas.dtoListas[index1].titulo}",
                               style: const TextStyle(
                                   fontSize: 15, color: Colors.grey),
                             ),
@@ -93,20 +93,9 @@ class _Listas {
   ];
 
   static final List<_DTO> dtoListas = [
-    _DTO("31/05/2023", listas.length, listas),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    _DTO("25/05/2023", listas2.length, listas2),
-    // _DTO("25/05/2023", listas2.length, listas2),
-    // _DTO("25/05/2023", listas2.length, listas2),
-    // _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("CRM CUSTOM", "31/05/2023", listas.length, listas),
+    _DTO("CASA", "25/05/2023", listas2.length, listas2),
+    _DTO("UNIVERSIDAD", "25/05/2023", listas2.length, listas2),
   ];
 }
 
@@ -119,7 +108,8 @@ class _PruebaTodo {
 
 class _DTO {
   String? fecha;
+  String? titulo;
   int? totalContenido;
   List<_PruebaTodo> info = [];
-  _DTO(this.fecha, this.totalContenido, this.info);
+  _DTO(this.titulo, this.fecha, this.totalContenido, this.info);
 }
