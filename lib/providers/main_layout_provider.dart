@@ -8,6 +8,7 @@ class MainLayoutProvider extends ChangeNotifier {
   String _currentView = Routes.todo;
   bool _openSidebar = true;
   late final TargetPlatform _platform;
+  String _addActionName = "Nueva Tarea";
 
   MainLayoutProvider(this._platform);
 
@@ -36,6 +37,13 @@ class MainLayoutProvider extends ChangeNotifier {
 
   set openSidebar(bool value) {
     _openSidebar = value;
+    notifyListeners();
+  }
+
+  String get addActionName => _addActionName;
+
+  set addActionName(String value) {
+    _addActionName = value;
     notifyListeners();
   }
 

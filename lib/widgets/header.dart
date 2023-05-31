@@ -24,20 +24,44 @@ class Header extends StatelessWidget {
           (platform == TargetPlatform.android || platform == TargetPlatform.iOS)
               ? null
               : 55,
-      child: Row(
-        children: [
-          if (size.width < 600) ...[
-            IconButton(
-              tooltip: 'Menu Lateral',
-              onPressed: () {
-                mainLayoutProvider.openSidebar =
-                    !mainLayoutProvider.openSidebar;
-              },
-              icon: const Icon(Icons.menu),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            if (size.width < 600) ...[
+              IconButton(
+                onPressed: () {
+                  mainLayoutProvider.openSidebar =
+                      !mainLayoutProvider.openSidebar;
+                },
+                icon: const Icon(Icons.menu),
+              ),
+              const CustomTitle(),
+            ],
+            const Spacer(),
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
+                overlayColor: MaterialStateProperty.all(Colors.grey[400]),
+              ),
+              onPressed: () {},
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  ),
+                  Text(
+                    mainLayoutProvider.addActionName,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const CustomTitle(),
           ],
-        ],
+        ),
       ),
     );
   }

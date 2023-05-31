@@ -11,12 +11,14 @@ class SideBar extends StatelessWidget {
     super.key,
   });
 
-  navigateTo(BuildContext context, Widget newView, String nameView) {
+  navigateTo(BuildContext context, Widget newView, String nameView,
+      String addActionName) {
     final mainLayoutProvider =
         Provider.of<MainLayoutProvider>(context, listen: false);
     mainLayoutProvider.changeViewTo(newView);
     mainLayoutProvider.openSidebar = false;
     mainLayoutProvider.currentView = nameView;
+    mainLayoutProvider.addActionName = addActionName;
   }
 
   @override
@@ -40,28 +42,29 @@ class SideBar extends StatelessWidget {
           SidebarItem(
             title: 'Por Hacer',
             icon: Icons.today_outlined,
-            onPressed: () => navigateTo(context, const TodoView(), Routes.todo),
+            onPressed: () => navigateTo(
+                context, const TodoView(), Routes.todo, "Nueva Tarea"),
             isActive: mainLayoutProvider.currentView == Routes.todo,
           ),
           SidebarItem(
             title: 'Notas',
             icon: Icons.notes_outlined,
-            onPressed: () =>
-                navigateTo(context, const NotesView(), Routes.notes),
+            onPressed: () => navigateTo(
+                context, const NotesView(), Routes.notes, "Nueva Nota"),
             isActive: mainLayoutProvider.currentView == Routes.notes,
           ),
           SidebarItem(
             title: 'Tareas',
             icon: Icons.home_work_outlined,
-            onPressed: () =>
-                navigateTo(context, const HomeworkView(), Routes.homework),
+            onPressed: () => navigateTo(
+                context, const HomeworkView(), Routes.homework, "Nueva Tarea"),
             isActive: mainLayoutProvider.currentView == Routes.homework,
           ),
           SidebarItem(
             title: 'Recordar',
             icon: Icons.checklist_rtl_outlined,
-            onPressed: () =>
-                navigateTo(context, const ToRememberView(), Routes.toRemember),
+            onPressed: () => navigateTo(context, const ToRememberView(),
+                Routes.toRemember, "Nuevo Recordatorio"),
             isActive: mainLayoutProvider.currentView == Routes.toRemember,
           ),
         ],
