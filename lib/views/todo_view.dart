@@ -9,54 +9,63 @@ class TodoView extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 15, left: 5),
-        child: Row(
+        child: Column(
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.commit_outlined,
-                            size: 23,
-                            color: Colors.black26,
-                          ),
-                          Text(
-                            " Creado el: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}",
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 3),
-                      child: ListView.separated(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _Listas.listas.length,
-                        itemBuilder: (context, index) => TodoItem(
-                            description: _Listas.listas[index].descripcion!,
-                            isCompleted: _Listas.listas[index].isCompleted!),
-                        separatorBuilder: (BuildContext context, int index) {
-                          return IntrinsicHeight(
-                            child: Row(
-                              children: const [
-                                VerticalDivider(color: Colors.grey),
-                                Expanded(child: Divider(endIndent: 15)),
-                              ],
+              child: Container(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _Listas.dtoListas.length,
+                  itemBuilder: (context, index1) {
+                    return Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.commit_outlined,
+                              size: 23,
+                              color: Colors.black26,
                             ),
-                          );
-                        },
+                            Text(
+                              " Creado el: ${_Listas.dtoListas[index1].fecha}",
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _Listas.dtoListas[index1].totalContenido,
+                            itemBuilder: (context, index2) {
+                              return TodoItem(
+                                description: _Listas.dtoListas[index1]
+                                    .info[index2].descripcion!,
+                                isCompleted: _Listas.dtoListas[index1]
+                                    .info[index2].isCompleted!,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return IntrinsicHeight(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 3),
+                        child: Row(
+                          children: const [
+                            VerticalDivider(color: Colors.grey),
+                            SizedBox(height: 15)
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -89,6 +98,15 @@ class _Listas {
     _DTO("25/05/2023", listas2.length, listas2),
     _DTO("25/05/2023", listas2.length, listas2),
     _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    _DTO("25/05/2023", listas2.length, listas2),
+    // _DTO("25/05/2023", listas2.length, listas2),
+    // _DTO("25/05/2023", listas2.length, listas2),
+    // _DTO("25/05/2023", listas2.length, listas2),
   ];
 }
 
