@@ -26,10 +26,13 @@ class TodoView extends StatelessWidget {
                               size: 23,
                               color: Colors.black26,
                             ),
-                            Text(
-                              " Creado el: ${_Listas.dtoListas[index1].fecha} - ${_Listas.dtoListas[index1].titulo}",
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.grey),
+                            Expanded(
+                              child: Text(
+                                " Creado el: ${_Listas.dtoListas[index1].fecha} - ${_Listas.dtoListas[index1].titulo}",
+                                maxLines: 2,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Colors.grey),
+                              ),
                             ),
                           ],
                         ),
