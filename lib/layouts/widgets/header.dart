@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
-import 'package:notes_app/widgets/title.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
@@ -31,6 +30,7 @@ class Header extends StatelessWidget {
           children: [
             if (size.width < 638) ...[
               IconButton(
+                splashRadius: 20,
                 onPressed: () {
                   mainLayoutProvider.openSidebar =
                       !mainLayoutProvider.openSidebar;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/layouts/widgets/widgets.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
-import 'package:notes_app/widgets/header.dart';
-import 'package:notes_app/widgets/sidebar.dart';
 import 'package:provider/provider.dart';
 
 class MainLayout extends StatelessWidget {
@@ -53,12 +52,12 @@ class MainLayout extends StatelessWidget {
               bottom: 10,
               right: 10,
               child: FloatingActionButton(
+                backgroundColor: Color(0xffC8C8C8),
+                onPressed: () {},
                 child: const Icon(
                   Icons.search,
                   color: Colors.black,
                 ),
-                backgroundColor: Colors.grey,
-                onPressed: () {},
               ),
             ),
         ],

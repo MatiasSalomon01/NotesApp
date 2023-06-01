@@ -3,7 +3,6 @@ import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/layouts/widgets/widgets.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
 import 'package:notes_app/views/views.dart';
-import 'package:notes_app/widgets/title.dart';
 import 'package:provider/provider.dart';
 
 class SideBar extends StatelessWidget {
