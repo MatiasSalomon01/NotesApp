@@ -18,7 +18,7 @@ class MainLayout extends StatelessWidget {
         children: [
           Row(
             children: [
-              if (size.width > 600) const SideBar(),
+              if (size.width > 637) const SideBar(),
               Expanded(
                 child: Column(
                   children: [
@@ -29,7 +29,7 @@ class MainLayout extends StatelessWidget {
               )
             ],
           ),
-          if (size.width < 600) ...{
+          if (size.width < 637) ...{
             // Container(
             //   color: Colors.amber,
             // ),

@@ -42,29 +42,29 @@ class SideBar extends StatelessWidget {
           SidebarItem(
             title: 'Por Hacer',
             icon: Icons.today_outlined,
-            onPressed: () => navigateTo(
-                context, const TodoView(), Routes.todo, "Nueva Tarea"),
+            onPressed: () =>
+                navigateTo(context, const TodoView(), Routes.todo, "Tarea"),
             isActive: mainLayoutProvider.currentView == Routes.todo,
           ),
           SidebarItem(
             title: 'Notas',
             icon: Icons.notes_outlined,
-            onPressed: () => navigateTo(
-                context, const NotesView(), Routes.notes, "Nueva Nota"),
+            onPressed: () =>
+                navigateTo(context, const NotesView(), Routes.notes, "Nota"),
             isActive: mainLayoutProvider.currentView == Routes.notes,
           ),
           SidebarItem(
             title: 'Tareas',
             icon: Icons.home_work_outlined,
             onPressed: () => navigateTo(
-                context, const HomeworkView(), Routes.homework, "Nueva Tarea"),
+                context, const HomeworkView(), Routes.homework, "Tarea"),
             isActive: mainLayoutProvider.currentView == Routes.homework,
           ),
           SidebarItem(
             title: 'Recordar',
             icon: Icons.checklist_rtl_outlined,
             onPressed: () => navigateTo(context, const ToRememberView(),
-                Routes.toRemember, "Nuevo Recordatorio"),
+                Routes.toRemember, "Recordatorio"),
             isActive: mainLayoutProvider.currentView == Routes.toRemember,
           ),
         ],

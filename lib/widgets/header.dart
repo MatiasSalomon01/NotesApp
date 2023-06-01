@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            if (size.width < 637) ...[
+            if (size.width < 638) ...[
               IconButton(
                 onPressed: () {
                   mainLayoutProvider.openSidebar =
@@ -77,14 +77,15 @@ class Header extends StatelessWidget {
                   ),
                   onPressed: () {},
                   child: Row(
-                    children: [
-                      const Icon(
+                    children: const [
+                      Icon(
                         Icons.add,
                         color: Colors.black,
                       ),
                       Text(
-                        mainLayoutProvider.addActionName,
-                        style: const TextStyle(
+                        // mainLayoutProvider.addActionName,
+                        "Añadir",
+                        style: TextStyle(
                           color: Colors.black,
                         ),
                       ),

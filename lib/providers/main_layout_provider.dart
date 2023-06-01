@@ -8,7 +8,7 @@ class MainLayoutProvider extends ChangeNotifier {
   String _currentView = Routes.todo;
   bool _openSidebar = true;
   late final TargetPlatform _platform;
-  String _addActionName = "Nueva Tarea";
+  String _addActionName = "Tarea";
 
   MainLayoutProvider(this._platform);
 
