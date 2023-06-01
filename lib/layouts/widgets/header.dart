@@ -37,44 +37,24 @@ class Header extends StatelessWidget {
                 icon: const Icon(Icons.menu),
               ),
               const SizedBox(width: 5),
-              // const CustomTitle(margin: EdgeInsets.symmetric(horizontal: 10)),
             ],
-            if (size.width > 291)
-              Container(
-                width: size.width > 410 ? 300 : 180,
-                height: 30,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black38),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: TextFormField(
-                  cursorColor: Colors.black,
-                  initialValue: null,
-                  scrollPadding: const EdgeInsets.all(0),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Buscar',
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    ),
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
+            if (size.width > 713.0) ...{
+              const SearchBar(width: 400),
+            } else ...{
+              const Expanded(child: SearchBar())
+            },
             if (size.width > 483) ...[
               Padding(
-                padding: const EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextButton(
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.grey[300]),
                     overlayColor: MaterialStateProperty.all(Colors.grey[400]),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print(size);
+                  },
                   child: Row(
                     children: const [
                       Icon(
@@ -82,7 +62,6 @@ class Header extends StatelessWidget {
                         color: Colors.black,
                       ),
                       Text(
-                        // mainLayoutProvider.addActionName,
                         "Añadir",
                         style: TextStyle(
                           color: Colors.black,
@@ -100,7 +79,9 @@ class Header extends StatelessWidget {
                   side: MaterialStateProperty.all(BorderSide.none),
                   shape: MaterialStateProperty.all(const CircleBorder()),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  print(size);
+                },
                 child: const Icon(
                   Icons.add,
                   color: Colors.black,
@@ -114,5 +95,40 @@ class Header extends StatelessWidget {
   }
 }
 
-// flutter: Size(627.0, 572.0)
-// flutter: Size(289.0, 572.0)
+class SearchBar extends StatelessWidget {
+  final double? width;
+  const SearchBar({
+    super.key,
+    this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // width: size.width > 412 ? 300 : 200,
+      width: width,
+      height: 30,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: TextFormField(
+        cursorColor: Colors.black,
+        initialValue: null,
+        scrollPadding: const EdgeInsets.all(0),
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Buscar',
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey,
+          ),
+          labelStyle: TextStyle(
+            color: Colors.grey,
+          ),
+          hintStyle: TextStyle(color: Colors.grey),
+        ),
+      ),
+    );
+  }
+}

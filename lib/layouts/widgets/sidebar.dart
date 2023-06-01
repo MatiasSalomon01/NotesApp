@@ -30,7 +30,7 @@ class SideBar extends StatelessWidget {
           ? 200
           : mainLayoutProvider.openSidebar
               ? mainLayoutProvider.platform == TargetPlatform.android
-                  ? 350
+                  ? 300
                   : 200
               : 0,
       child: ListView(

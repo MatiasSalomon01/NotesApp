@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/views/widgets/todo_item.dart';
 
@@ -8,11 +9,15 @@ class TodoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.only(top: 8, bottom: 15, left: 5),
+        margin: const EdgeInsets.only(left: 5, bottom: 15),
         child: Column(
           children: [
             Expanded(
               child: ListView.separated(
+                padding: const EdgeInsets.only(top: 10),
+                physics: const BouncingScrollPhysics(
+                  decelerationRate: ScrollDecelerationRate.fast,
+                ),
                 shrinkWrap: true,
                 itemCount: _Listas.dtoListas.length,
                 itemBuilder: (context, index1) {
@@ -38,6 +43,7 @@ class TodoView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 3),
                         child: ListView.builder(
+                          padding: EdgeInsets.all(0),
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: _Listas.dtoListas[index1].totalContenido,
@@ -97,6 +103,7 @@ class _Listas {
     _DTO("CRM CUSTOM", "31/05/2023", listas.length, listas),
     _DTO("CASA", "25/05/2023", listas2.length, listas2),
     _DTO("UNIVERSIDAD", "25/05/2023", listas2.length, listas2),
+    _DTO("CRM CUSTOM", "31/05/2023", listas.length, listas),
   ];
 }
 
