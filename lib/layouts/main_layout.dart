@@ -16,19 +16,7 @@ class MainLayout extends StatelessWidget {
         children: [
           const _DesktopBody(),
           if (size.width < 637) const _MobileBody(),
-          if (size.width < 291)
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: FloatingActionButton(
-                backgroundColor: const Color(0xffC8C8C8),
-                onPressed: () {},
-                child: const Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-              ),
-            ),
+          if (size.width < 291) const CustomFloatingActionButton(),
         ],
       ),
     );
