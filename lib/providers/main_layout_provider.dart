@@ -6,8 +6,9 @@ class MainLayoutProvider extends ChangeNotifier {
   double _width = 210;
   Widget _view = const TodoView();
   String _currentView = Routes.todo;
-  bool _openSidebar = true;
+  bool _openSidebar = false;
   late final TargetPlatform _platform;
+  String _addActionName = "Tarea";
 
   MainLayoutProvider(this._platform);
 
@@ -36,6 +37,13 @@ class MainLayoutProvider extends ChangeNotifier {
 
   set openSidebar(bool value) {
     _openSidebar = value;
+    notifyListeners();
+  }
+
+  String get addActionName => _addActionName;
+
+  set addActionName(String value) {
+    _addActionName = value;
     notifyListeners();
   }
 

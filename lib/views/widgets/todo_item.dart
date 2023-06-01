@@ -10,6 +10,7 @@ class TodoItem extends StatefulWidget {
   });
 
   @override
+  // ignore: no_logic_in_create_state
   State<TodoItem> createState() => _TodoItemState(isCompleted);
 }
 
@@ -22,9 +23,12 @@ class _TodoItemState extends State<TodoItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return IntrinsicHeight(
       child: Row(
         children: [
+          const VerticalDivider(
+            color: Colors.grey,
+          ),
           Checkbox(
             activeColor: Colors.black,
             value: activated,
@@ -40,7 +44,6 @@ class _TodoItemState extends State<TodoItem> {
               maxLines: 2,
             ),
           ),
-          const SizedBox(width: 10),
           IconButton(
             onPressed: () {},
             splashRadius: 20,
@@ -51,6 +54,7 @@ class _TodoItemState extends State<TodoItem> {
             splashRadius: 20,
             icon: const Icon(Icons.delete),
           ),
+          const SizedBox(width: 5),
         ],
       ),
     );
