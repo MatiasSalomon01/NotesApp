@@ -32,8 +32,7 @@ class Header extends StatelessWidget {
               IconButton(
                 splashRadius: 20,
                 onPressed: () {
-                  mainLayoutProvider.openSidebar =
-                      !mainLayoutProvider.openSidebar;
+                  mainLayoutProvider.openSidebar = true;
                 },
                 icon: const Icon(Icons.menu),
               ),

@@ -5,10 +5,8 @@ class ToRememberView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        child: Text('ToRemember View'),
-      ),
+    return const Expanded(
+      child: Text('ToRemember View'),
     );
   }
 }

@@ -10,6 +10,7 @@ class TodoItem extends StatefulWidget {
   });
 
   @override
+  // ignore: no_logic_in_create_state
   State<TodoItem> createState() => _TodoItemState(isCompleted);
 }
 
