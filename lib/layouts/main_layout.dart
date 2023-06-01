@@ -47,7 +47,20 @@ class MainLayout extends StatelessWidget {
                   )
               ],
             )
-          }
+          },
+          if (size.width < 291)
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: FloatingActionButton(
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                backgroundColor: Colors.grey,
+                onPressed: () {},
+              ),
+            ),
         ],
       ),
     );

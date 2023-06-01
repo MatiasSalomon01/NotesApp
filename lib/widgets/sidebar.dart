@@ -27,11 +27,11 @@ class SideBar extends StatelessWidget {
     final mainLayoutProvider = Provider.of<MainLayoutProvider>(context);
     return Container(
       color: const Color(0xffE1E1E1),
-      width: size.width > 600
+      width: size.width > 637
           ? 200
           : mainLayoutProvider.openSidebar
               ? mainLayoutProvider.platform == TargetPlatform.android
-                  ? 300
+                  ? 350
                   : 200
               : 0,
       child: ListView(

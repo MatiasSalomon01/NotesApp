@@ -25,11 +25,11 @@ class Header extends StatelessWidget {
               ? null
               : 55,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.only(left: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            if (size.width < 600) ...[
+            if (size.width < 637) ...[
               IconButton(
                 onPressed: () {
                   mainLayoutProvider.openSidebar =
@@ -37,57 +37,84 @@ class Header extends StatelessWidget {
                 },
                 icon: const Icon(Icons.menu),
               ),
-              const CustomTitle(),
+              const SizedBox(width: 5),
+              // const CustomTitle(margin: EdgeInsets.symmetric(horizontal: 10)),
             ],
-            Container(
-              width: 180,
-              height: 30,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black38),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextFormField(
-                cursorColor: Colors.black,
-                initialValue: null,
-                scrollPadding: const EdgeInsets.all(0),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Buscar',
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
+            if (size.width > 291)
+              Container(
+                width: size.width > 410 ? 300 : 180,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black38),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextFormField(
+                  cursorColor: Colors.black,
+                  initialValue: null,
+                  scrollPadding: const EdgeInsets.all(0),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Buscar',
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                    labelStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
-                  ),
-                  hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
-            ),
-            TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
-                overlayColor: MaterialStateProperty.all(Colors.grey[400]),
-              ),
-              onPressed: () {},
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.add,
-                    color: Colors.black,
+            if (size.width > 483) ...[
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.grey[300]),
+                    overlayColor: MaterialStateProperty.all(Colors.grey[400]),
                   ),
-                  Text(
-                    mainLayoutProvider.addActionName,
-                    style: const TextStyle(
-                      color: Colors.black,
-                    ),
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                      Text(
+                        mainLayoutProvider.addActionName,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ] else ...[
+              OutlinedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
+                  overlayColor: MaterialStateProperty.all(Colors.grey[400]),
+                  side: MaterialStateProperty.all(BorderSide.none),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
+                ),
+                onPressed: () {
+                  print(size);
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
+              )
+            ]
           ],
         ),
       ),
     );
   }
 }
+
+// flutter: Size(627.0, 572.0)
+// flutter: Size(289.0, 572.0)
