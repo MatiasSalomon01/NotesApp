@@ -100,9 +100,7 @@ class Header extends StatelessWidget {
                   side: MaterialStateProperty.all(BorderSide.none),
                   shape: MaterialStateProperty.all(const CircleBorder()),
                 ),
-                onPressed: () {
-                  print(size);
-                },
+                onPressed: () {},
                 child: const Icon(
                   Icons.add,
                   color: Colors.black,
