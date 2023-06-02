@@ -25,6 +25,8 @@ class _TodoItemState extends State<TodoItem> {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const VerticalDivider(
             color: Colors.grey,
@@ -40,21 +42,29 @@ class _TodoItemState extends State<TodoItem> {
               widget.description,
               style: TextStyle(
                   decoration: activated ? TextDecoration.lineThrough : null),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+              // overflow: TextOverflow.ellipsis,
+              maxLines: 3,
             ),
           ),
           IconButton(
             onPressed: () {},
             splashRadius: 20,
             icon: const Icon(Icons.edit_outlined),
+            tooltip: 'Editar',
           ),
           IconButton(
             onPressed: () {},
             splashRadius: 20,
             icon: const Icon(Icons.delete),
+            tooltip: 'Eliminar',
           ),
-          const SizedBox(width: 5),
+          IconButton(
+            onPressed: () {},
+            splashRadius: 20,
+            icon: const Icon(Icons.copy),
+            tooltip: 'Copiar Todo',
+          ),
+          const SizedBox(width: 10),
         ],
       ),
     );

@@ -84,7 +84,7 @@ class TodoView extends StatelessWidget {
 class _Listas {
   static final listas = [
     _PruebaTodo(
-        'Descripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacer',
+        'Descripcion de tarea por hacerescripcion de tarea por hacerescripcion e tarea por hacerescripcion de tarea por hacerescripcion e tarea por hacerescripcion de tarea por hacerescripcion e tarea por hacerescripcion de tarea por hacerescripcion e tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacerescripcion de tarea por hacer',
         true),
     _PruebaTodo('Descripcion de tarea por hacer', true),
     _PruebaTodo('Descripcion de tarea por hacer', false),
