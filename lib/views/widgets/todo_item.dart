@@ -43,7 +43,7 @@ class _TodoItemState extends State<TodoItem> {
               widget.description,
               style: TextStyle(
                   decoration: activated ? TextDecoration.lineThrough : null),
-              // overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.ellipsis,
               maxLines: 3,
             ),
           ),
@@ -68,13 +68,61 @@ class _TodoItemState extends State<TodoItem> {
             ),
             const SizedBox(width: 10),
           ] else ...[
-            IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              icon: const Icon(Icons.more_vert_outlined),
-              tooltip: 'Opciones',
+            PopupMenuButton(
+              splashRadius: 18,
+              padding: const EdgeInsets.all(0),
+              offset: const Offset(0, 40),
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem<String>(
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          splashRadius: 20,
+                          icon: const Icon(Icons.edit_outlined),
+                          tooltip: 'Editar',
+                        ),
+                        const Text('Editar')
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem<String>(
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          splashRadius: 20,
+                          icon: const Icon(Icons.delete),
+                          tooltip: 'Eliminar',
+                        ),
+                        const Text('Eliminar')
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem<String>(
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          splashRadius: 20,
+                          icon: const Icon(Icons.copy),
+                          tooltip: 'Copiar Todo',
+                        ),
+                        const Text('Copiar Todo')
+                      ],
+                    ),
+                  ),
+                ];
+              },
             ),
-            const SizedBox(width: 10),
+            // IconButton(
+            //   onPressed: () {},
+            //   splashRadius: 20,
+            //   icon: const Icon(Icons.more_vert_outlined),
+            //   tooltip: 'Opciones',
+            // ),
+            const SizedBox(width: 5),
           ],
         ],
       ),
