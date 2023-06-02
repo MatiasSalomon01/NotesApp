@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/services/services.dart';
+import 'package:provider/provider.dart';
 
 class TodoItem extends StatefulWidget {
   final String description;
@@ -74,6 +76,25 @@ class _TodoItemState extends State<TodoItem> {
               offset: const Offset(0, 40),
               itemBuilder: (context) {
                 return [
+                  PopupMenuItem<String>(
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            final todoService = Provider.of<TodoService>(
+                                context,
+                                listen: false);
+                            await todoService.getAll();
+                            // print('getall');
+                          },
+                          splashRadius: 20,
+                          icon: const Icon(Icons.call),
+                          tooltip: 'GetAll',
+                        ),
+                        const Text('GetAll')
+                      ],
+                    ),
+                  ),
                   PopupMenuItem<String>(
                     child: Row(
                       children: [
