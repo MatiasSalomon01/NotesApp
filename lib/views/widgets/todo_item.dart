@@ -23,6 +23,7 @@ class _TodoItemState extends State<TodoItem> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,25 +47,35 @@ class _TodoItemState extends State<TodoItem> {
               maxLines: 3,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            splashRadius: 20,
-            icon: const Icon(Icons.edit_outlined),
-            tooltip: 'Editar',
-          ),
-          IconButton(
-            onPressed: () {},
-            splashRadius: 20,
-            icon: const Icon(Icons.delete),
-            tooltip: 'Eliminar',
-          ),
-          IconButton(
-            onPressed: () {},
-            splashRadius: 20,
-            icon: const Icon(Icons.copy),
-            tooltip: 'Copiar Todo',
-          ),
-          const SizedBox(width: 10),
+          if (size.width > 711) ...[
+            IconButton(
+              onPressed: () {},
+              splashRadius: 20,
+              icon: const Icon(Icons.edit_outlined),
+              tooltip: 'Editar',
+            ),
+            IconButton(
+              onPressed: () {},
+              splashRadius: 20,
+              icon: const Icon(Icons.delete),
+              tooltip: 'Eliminar',
+            ),
+            IconButton(
+              onPressed: () {},
+              splashRadius: 20,
+              icon: const Icon(Icons.copy),
+              tooltip: 'Copiar Todo',
+            ),
+            const SizedBox(width: 10),
+          ] else ...[
+            IconButton(
+              onPressed: () {},
+              splashRadius: 20,
+              icon: const Icon(Icons.more_vert_outlined),
+              tooltip: 'Opciones',
+            ),
+            const SizedBox(width: 10),
+          ],
         ],
       ),
     );

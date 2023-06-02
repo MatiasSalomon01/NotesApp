@@ -12,7 +12,9 @@ class CustomTextButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
           overlayColor: MaterialStateProperty.all(Colors.grey[400]),
         ),
-        onPressed: () {},
+        onPressed: () {
+          print(MediaQuery.of(context).size);
+        },
         child: Row(
           children: const [
             Icon(
