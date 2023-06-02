@@ -6,12 +6,14 @@ import 'package:http/http.dart' as http;
 import 'package:notes_app/models/models.dart';
 
 class TodoService extends ChangeNotifier {
-  Future<List<Task>> getAll() async {
+  List<Task> tasks = [];
+  TodoService() {
+    getAll();
+  }
+  getAll() async {
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.get(url);
     final Map<String, dynamic> map = json.decode(response.body);
-
-    List<Task> tasks = [];
 
     map.forEach((key, value) {
       final model = Task.fromJson(value);
@@ -19,7 +21,7 @@ class TodoService extends ChangeNotifier {
       tasks.add(model);
     });
 
-    return tasks;
+    notifyListeners();
   }
 
   getById() {}

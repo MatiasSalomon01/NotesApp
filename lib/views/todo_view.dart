@@ -8,78 +8,76 @@ class TodoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TodoService(),
-      child: Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(left: 5, bottom: 15),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(top: 10),
-                  physics: const BouncingScrollPhysics(
-                    decelerationRate: ScrollDecelerationRate.fast,
-                  ),
-                  shrinkWrap: true,
-                  itemCount: _Listas.dtoListas.length,
-                  itemBuilder: (context, index1) {
-                    return Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.commit_outlined,
-                              size: 23,
-                              color: Colors.black26,
-                            ),
-                            Expanded(
-                              child: Text(
-                                " Creado el: ${_Listas.dtoListas[index1].fecha} - ${_Listas.dtoListas[index1].titulo}",
-                                maxLines: 2,
-                                style: const TextStyle(
-                                    fontSize: 15, color: Colors.grey),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 3),
-                          child: ListView.builder(
-                            padding: const EdgeInsets.all(0),
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: _Listas.dtoListas[index1].totalContenido,
-                            itemBuilder: (context, index2) {
-                              return TodoItem(
-                                description: _Listas.dtoListas[index1]
-                                    .info[index2].descripcion!,
-                                isCompleted: _Listas.dtoListas[index1]
-                                    .info[index2].isCompleted!,
-                              );
-                            },
+    final todoService = Provider.of<TodoService>(context);
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(left: 5, bottom: 15),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.only(top: 10),
+                physics: const BouncingScrollPhysics(
+                  decelerationRate: ScrollDecelerationRate.fast,
+                ),
+                shrinkWrap: true,
+                itemCount: todoService.tasks.length,
+                itemBuilder: (context, index1) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.commit_outlined,
+                            size: 23,
+                            color: Colors.black26,
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return IntrinsicHeight(
-                      child: Padding(
+                          Expanded(
+                            child: Text(
+                              " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
+                              maxLines: 2,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.grey),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
                         padding: const EdgeInsets.only(left: 3),
-                        child: Row(
-                          children: const [
-                            VerticalDivider(color: Colors.grey),
-                            SizedBox(height: 15)
-                          ],
+                        child: ListView.builder(
+                          padding: const EdgeInsets.all(0),
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: todoService.tasks[index1].contentCount,
+                          itemBuilder: (context, index2) {
+                            return TodoItem(
+                              description: todoService
+                                  .tasks[index1].content[index2].description,
+                              isCompleted: todoService
+                                  .tasks[index1].content[index2].isCompleted,
+                            );
+                          },
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ],
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return IntrinsicHeight(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 3),
+                      child: Row(
+                        children: const [
+                          VerticalDivider(color: Colors.grey),
+                          SizedBox(height: 15)
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

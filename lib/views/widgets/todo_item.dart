@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/services/services.dart';
-import 'package:provider/provider.dart';
 
 class TodoItem extends StatefulWidget {
   final String description;
@@ -80,13 +78,7 @@ class _TodoItemState extends State<TodoItem> {
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () async {
-                            final todoService = Provider.of<TodoService>(
-                                context,
-                                listen: false);
-                            await todoService.getAll();
-                            // print('getall');
-                          },
+                          onPressed: () {},
                           splashRadius: 20,
                           icon: const Icon(Icons.call),
                           tooltip: 'GetAll',
@@ -104,7 +96,7 @@ class _TodoItemState extends State<TodoItem> {
                           icon: const Icon(Icons.edit_outlined),
                           tooltip: 'Editar',
                         ),
-                        const Text('Editar')
+                        const Text('Editar'),
                       ],
                     ),
                   ),
