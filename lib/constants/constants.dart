@@ -8,6 +8,9 @@ class Routes {
 }
 
 class Constants {
+  static const String baseUrl =
+      "https://notesapp-4ebee-default-rtdb.firebaseio.com";
+
   static EdgeInsetsGeometry? setHeaderPlatformPadding(
       TargetPlatform platform, double safeArea, Size size) {
     if (platform == TargetPlatform.android || platform == TargetPlatform.iOS) {
