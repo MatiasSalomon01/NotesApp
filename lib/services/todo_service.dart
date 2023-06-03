@@ -36,5 +36,8 @@ class TodoService extends ChangeNotifier {
 
   update() {}
 
-  delete() {}
+  delete(String id) async {
+    final url = Uri.https(Constants.baseUrl, 'Todo/$id.json');
+    await http.delete(url);
+  }
 }

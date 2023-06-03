@@ -51,6 +51,7 @@ class TodoView extends StatelessWidget {
                           itemCount: todoService.tasks[index1].contentCount,
                           itemBuilder: (context, index2) {
                             return TodoItem(
+                              id: todoService.tasks[index1].id,
                               description: todoService
                                   .tasks[index1].content[index2].description,
                               isCompleted: todoService

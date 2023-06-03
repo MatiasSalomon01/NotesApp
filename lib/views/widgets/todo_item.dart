@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/services/services.dart';
+import 'package:provider/provider.dart';
 
 class TodoItem extends StatefulWidget {
+  final String? id;
   final String description;
   final bool isCompleted;
   const TodoItem({
     super.key,
+    this.id,
     required this.description,
     required this.isCompleted,
   });
@@ -24,6 +28,8 @@ class _TodoItemState extends State<TodoItem> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final todoService = Provider.of<TodoService>(context);
+
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +61,10 @@ class _TodoItemState extends State<TodoItem> {
               tooltip: 'Editar',
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                todoService.delete(widget.id!);
+                todoService.getAll();
+              },
               splashRadius: 20,
               icon: const Icon(Icons.delete),
               tooltip: 'Eliminar',
