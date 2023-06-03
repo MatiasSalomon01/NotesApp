@@ -14,15 +14,17 @@ class TodoService extends ChangeNotifier {
     tasks.clear();
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.get(url);
-    final Map<String, dynamic> map = json.decode(response.body);
 
-    map.forEach((key, value) {
-      final model = Task.fromJson(value);
-      model.id = key;
-      tasks.add(model);
-    });
-
-    notifyListeners();
+    if (response.body != 'null') {
+      final Map<String, dynamic> map = json.decode(response.body);
+      map.forEach((key, value) {
+        final model = Task.fromJson(value);
+        model.id = key;
+        tasks.add(model);
+      });
+      notifyListeners();
+    }
+    print(tasks.length);
   }
 
   getById() {}
@@ -31,7 +33,7 @@ class TodoService extends ChangeNotifier {
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.post(url, body: task.toRawJson());
     final Map<String, dynamic> map = json.decode(response.body);
-    // return map.values.first.toString();
+    return map.values.first.toString();
   }
 
   update() {}
