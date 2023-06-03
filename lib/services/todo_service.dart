@@ -7,10 +7,14 @@ import 'package:notes_app/models/models.dart';
 
 class TodoService extends ChangeNotifier {
   List<Task> tasks = [];
+  bool isLoading = false;
+
   TodoService() {
     getAll();
   }
+
   getAll() async {
+    isLoading = true;
     tasks.clear();
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.get(url);
@@ -24,7 +28,7 @@ class TodoService extends ChangeNotifier {
       });
       notifyListeners();
     }
-    print(tasks.length);
+    isLoading = false;
   }
 
   getById() {}
