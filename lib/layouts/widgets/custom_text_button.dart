@@ -25,8 +25,10 @@ class _CustomTextButtonState extends State<CustomTextButton> {
             context: context,
             builder: (context) {
               return AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 title: const Text('Creacion de Tarea'),
-                content: Container(
+                content: SizedBox(
                   height: 150,
                   child: Column(
                     children: [
