@@ -9,6 +9,8 @@ class Routes {
 
 class Constants {
   static const String baseUrl = "notesapp-4ebee-default-rtdb.firebaseio.com";
+  static final String currentDate =
+      '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}';
 
   static EdgeInsetsGeometry? setHeaderPlatformPadding(
       TargetPlatform platform, double safeArea, Size size) {

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants/constants.dart';
+import 'package:notes_app/models/models.dart';
+import 'package:notes_app/services/services.dart';
+import 'package:provider/provider.dart';
 
 class CustomTextButton extends StatefulWidget {
   CustomTextButton({super.key});
@@ -13,6 +17,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
 
   @override
   Widget build(BuildContext context) {
+    final todoService = Provider.of<TodoService>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextButton(
@@ -36,8 +41,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                         enabled: false,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
-                          hintText:
-                              '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+                          hintText: Constants.currentDate,
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
@@ -73,13 +77,31 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                       backgroundColor:
                           MaterialStateProperty.all(Colors.grey[300]),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (controllerTitle.text.isEmpty ||
                           controllerDescription.text.isEmpty) {
                         print("ERROR LOS INPUTS ESTAN VACIOS");
                       } else {
-                        print(
-                            "INFORMACION: ${controllerTitle.text} - ${controllerDescription.text}");
+                        // print(
+                        //     "INFORMACION: ${controllerTitle.text} - ${controllerDescription.text}");
+
+                        final task = Task(
+                          content: [
+                            Content(
+                              description: controllerDescription.text,
+                              isCompleted: false,
+                            )
+                          ],
+                          contentCount: 1,
+                          date: Constants.currentDate,
+                          title: controllerTitle.text,
+                        );
+
+                        await todoService.create(task);
+
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pop();
+                        todoService.getAll();
                       }
                     },
                     child: const Text('Crear',

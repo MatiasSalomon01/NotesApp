@@ -11,6 +11,7 @@ class TodoService extends ChangeNotifier {
     getAll();
   }
   getAll() async {
+    tasks.clear();
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.get(url);
     final Map<String, dynamic> map = json.decode(response.body);
@@ -26,7 +27,12 @@ class TodoService extends ChangeNotifier {
 
   getById() {}
 
-  create() {}
+  create(Task task) async {
+    final url = Uri.https(Constants.baseUrl, 'Todo.json');
+    final response = await http.post(url, body: task.toRawJson());
+    final Map<String, dynamic> map = json.decode(response.body);
+    // return map.values.first.toString();
+  }
 
   update() {}
 
