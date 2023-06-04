@@ -61,12 +61,7 @@ class _TodoItemState extends State<TodoItem> {
               tooltip: 'Editar',
             ),
             IconButton(
-              onPressed: () async {
-                await todoService.delete(widget.id!);
-                NotificationService.showSnackbar(
-                    'Tarea Eliminada correctamente!', Colors.green);
-                await todoService.getAll();
-              },
+              onPressed: () async => await _delete(todoService),
               splashRadius: 20,
               icon: const Icon(Icons.delete),
               tooltip: 'Eliminar',
@@ -83,60 +78,55 @@ class _TodoItemState extends State<TodoItem> {
               splashRadius: 18,
               padding: const EdgeInsets.all(0),
               offset: const Offset(0, 40),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
               itemBuilder: (context) {
                 return [
-                  PopupMenuItem<String>(
+                  PopupMenuItem(
+                    onTap: () => print('asdasdsadsa'),
                     child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          splashRadius: 20,
-                          icon: const Icon(Icons.edit_outlined),
-                          tooltip: 'Editar',
-                        ),
-                        const Text('Editar'),
+                      children: const [
+                        Icon(Icons.edit_outlined),
+                        SizedBox(width: 10),
+                        Text('Editar'),
                       ],
                     ),
                   ),
-                  PopupMenuItem<String>(
+                  PopupMenuItem(
+                    onTap: () async => await _delete(todoService),
                     child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          splashRadius: 20,
-                          icon: const Icon(Icons.delete),
-                          tooltip: 'Eliminar',
-                        ),
-                        const Text('Eliminar')
+                      children: const [
+                        Icon(Icons.delete),
+                        SizedBox(width: 10),
+                        Text('Eliminar'),
                       ],
                     ),
                   ),
-                  PopupMenuItem<String>(
+                  PopupMenuItem(
+                    onTap: () => print('asdasdsadsa'),
                     child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          splashRadius: 20,
-                          icon: const Icon(Icons.copy),
-                          tooltip: 'Copiar Todo',
-                        ),
-                        const Text('Copiar Todo')
+                      children: const [
+                        Icon(Icons.copy),
+                        SizedBox(width: 10),
+                        Text('Copiar Todo'),
                       ],
                     ),
                   ),
                 ];
               },
             ),
-            // IconButton(
-            //   onPressed: () {},
-            //   splashRadius: 20,
-            //   icon: const Icon(Icons.more_vert_outlined),
-            //   tooltip: 'Opciones',
-            // ),
             const SizedBox(width: 5),
           ],
         ],
       ),
     );
+  }
+
+  Future _delete(TodoService todoService) async {
+    await todoService.delete(widget.id!);
+    NotificationService.showSnackbar(
+        'Tarea Eliminada correctamente!', Colors.green);
+    await todoService.getAll();
   }
 }
