@@ -6,9 +6,11 @@ class TodoItem extends StatefulWidget {
   final String? id;
   String description;
   final bool isCompleted;
+  int? index;
   TodoItem({
     super.key,
     this.id,
+    this.index,
     required this.description,
     required this.isCompleted,
   });
@@ -30,6 +32,7 @@ class _TodoItemState extends State<TodoItem> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final todoService = Provider.of<TodoService>(context);
+    String firstDescription = widget.description;
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,8 +102,14 @@ class _TodoItemState extends State<TodoItem> {
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(14),
                   ),
-                  onPressed: () {
-                    print(widget.id);
+                  onPressed: () async {
+                    if (firstDescription == widget.description) {
+                    } else {
+                      await todoService.updateOnlyDescription(
+                          widget.id!, widget.index!, widget.description);
+                      NotificationService.showSnackbar(
+                          'Actualizado con Exito!', Colors.green);
+                    }
                     setState(() => editing = false);
                   },
                   child: const Icon(

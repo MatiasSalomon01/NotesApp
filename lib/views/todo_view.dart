@@ -75,6 +75,7 @@ class TodoView extends StatelessWidget {
                                         .content[index2].description,
                                     isCompleted: todoService.tasks[index1]
                                         .content[index2].isCompleted,
+                                    index: index2,
                                   );
                                 },
                               ),

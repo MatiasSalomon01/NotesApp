@@ -40,7 +40,11 @@ class TodoService extends ChangeNotifier {
     return map.values.first.toString();
   }
 
-  update() {}
+  updateOnlyDescription(String id, int index, String description) async {
+    final url = Uri.https(
+        Constants.baseUrl, 'Todo/$id/content/$index/description.json');
+    await http.put(url, body: json.encode(description));
+  }
 
   delete(String id) async {
     final url = Uri.https(Constants.baseUrl, 'Todo/$id.json');
