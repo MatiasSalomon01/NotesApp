@@ -61,8 +61,10 @@ class _TodoItemState extends State<TodoItem> {
               tooltip: 'Editar',
             ),
             IconButton(
-              onPressed: () {
-                todoService.delete(widget.id!);
+              onPressed: () async {
+                await todoService.delete(widget.id!);
+                NotificationService.showSnackbar(
+                    'Tarea Eliminada correctamente!', Colors.green);
                 todoService.getAll();
               },
               splashRadius: 20,
