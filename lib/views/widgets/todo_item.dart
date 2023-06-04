@@ -91,19 +91,6 @@ class _TodoItemState extends State<TodoItem> {
                         IconButton(
                           onPressed: () {},
                           splashRadius: 20,
-                          icon: const Icon(Icons.call),
-                          tooltip: 'GetAll',
-                        ),
-                        const Text('GetAll')
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          splashRadius: 20,
                           icon: const Icon(Icons.edit_outlined),
                           tooltip: 'Editar',
                         ),

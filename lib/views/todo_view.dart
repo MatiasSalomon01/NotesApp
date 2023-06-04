@@ -33,6 +33,7 @@ class TodoView extends StatelessWidget {
                         return Column(
                           children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Icon(
                                   Icons.commit_outlined,
@@ -40,11 +41,21 @@ class TodoView extends StatelessWidget {
                                   color: Colors.black26,
                                 ),
                                 Expanded(
-                                  child: Text(
-                                    " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                        fontSize: 15, color: Colors.grey),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Tooltip(
+                                      message: todoService.tasks[index1].title,
+                                      waitDuration:
+                                          const Duration(milliseconds: 800),
+                                      child: Text(
+                                        " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
