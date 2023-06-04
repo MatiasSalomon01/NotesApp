@@ -101,6 +101,8 @@ class _CustomTextButtonState extends State<CustomTextButton> {
 
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pop();
+                        NotificationService.showSnackbar(
+                            'Tarea Creada correctamente!');
                         todoService.getAll();
                       }
                     },
