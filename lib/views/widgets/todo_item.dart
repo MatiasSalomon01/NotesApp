@@ -65,7 +65,7 @@ class _TodoItemState extends State<TodoItem> {
                 await todoService.delete(widget.id!);
                 NotificationService.showSnackbar(
                     'Tarea Eliminada correctamente!', Colors.green);
-                todoService.getAll();
+                await todoService.getAll();
               },
               splashRadius: 20,
               icon: const Icon(Icons.delete),

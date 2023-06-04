@@ -82,9 +82,6 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                           controllerDescription.text.isEmpty) {
                         print("ERROR LOS INPUTS ESTAN VACIOS");
                       } else {
-                        // print(
-                        //     "INFORMACION: ${controllerTitle.text} - ${controllerDescription.text}");
-
                         final task = Task(
                           content: [
                             Content(
@@ -103,7 +100,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                         Navigator.of(context).pop();
                         NotificationService.showSnackbar(
                             'Tarea Creada correctamente!', Colors.green);
-                        todoService.getAll();
+                        await todoService.getAll();
                       }
                     },
                     child: const Text('Crear',
