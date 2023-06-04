@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 class TodoItem extends StatefulWidget {
   final String? id;
-  final String description;
+  String description;
   final bool isCompleted;
-  const TodoItem({
+  TodoItem({
     super.key,
     this.id,
     required this.description,
@@ -25,11 +25,11 @@ class _TodoItemState extends State<TodoItem> {
     activated = isCompleted;
   }
 
+  bool editing = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final todoService = Provider.of<TodoService>(context);
-
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,34 +44,73 @@ class _TodoItemState extends State<TodoItem> {
             onChanged: (value) => setState(() => activated = !activated),
           ),
           const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              widget.description,
-              style: TextStyle(
-                  decoration: activated ? TextDecoration.lineThrough : null),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-            ),
-          ),
+          !editing
+              ? Expanded(
+                  child: Text(
+                    widget.description,
+                    style: TextStyle(
+                        decoration:
+                            activated ? TextDecoration.lineThrough : null),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: TextFormField(
+                      initialValue: widget.description,
+                      style: const TextStyle(fontSize: 14),
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 12),
+                        isCollapsed: true,
+                      ),
+                      onChanged: (value) => widget.description = value,
+                    ),
+                  ),
+                ),
           if (size.width > 711) ...[
-            IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              icon: const Icon(Icons.edit_outlined),
-              tooltip: 'Editar',
-            ),
-            IconButton(
-              onPressed: () async => await _delete(todoService),
-              splashRadius: 20,
-              icon: const Icon(Icons.delete),
-              tooltip: 'Eliminar',
-            ),
-            IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              icon: const Icon(Icons.copy),
-              tooltip: 'Copiar Todo',
-            ),
+            if (!editing) ...[
+              IconButton(
+                onPressed: () => setState(() => editing = true),
+                splashRadius: 20,
+                icon: const Icon(Icons.edit_outlined),
+                tooltip: 'Editar',
+              ),
+              IconButton(
+                onPressed: () async => await _delete(todoService),
+                splashRadius: 20,
+                icon: const Icon(Icons.delete),
+                tooltip: 'Eliminar',
+              ),
+              IconButton(
+                onPressed: () {},
+                splashRadius: 20,
+                icon: const Icon(Icons.copy),
+                tooltip: 'Copiar Todo',
+              ),
+            ] else ...[
+              Tooltip(
+                message: 'Confirmar',
+                waitDuration: const Duration(milliseconds: 800),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(14),
+                  ),
+                  onPressed: () {
+                    print(widget.id);
+                    setState(() => editing = false);
+                  },
+                  child: const Icon(
+                    Icons.done,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
             const SizedBox(width: 10),
           ] else ...[
             PopupMenuButton(
