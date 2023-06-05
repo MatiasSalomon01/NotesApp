@@ -46,6 +46,12 @@ class TodoService extends ChangeNotifier {
     await http.put(url, body: json.encode(description));
   }
 
+  updateOnlyIsCompleted(String id, int index, bool isCompleted) async {
+    final url = Uri.https(
+        Constants.baseUrl, 'Todo/$id/content/$index/isCompleted.json');
+    await http.put(url, body: json.encode(isCompleted));
+  }
+
   delete(String id) async {
     final url = Uri.https(Constants.baseUrl, 'Todo/$id.json');
     await http.delete(url);

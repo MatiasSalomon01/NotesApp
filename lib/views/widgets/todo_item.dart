@@ -44,7 +44,11 @@ class _TodoItemState extends State<TodoItem> {
           Checkbox(
             activeColor: Colors.black,
             value: activated,
-            onChanged: (value) => setState(() => activated = !activated),
+            onChanged: (value) async {
+              setState(() => activated = !activated);
+              await todoService.updateOnlyIsCompleted(
+                  widget.id!, widget.index!, activated);
+            },
           ),
           const SizedBox(width: 10),
           !editing
