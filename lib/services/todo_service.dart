@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
@@ -50,6 +51,18 @@ class TodoService extends ChangeNotifier {
     final url = Uri.https(
         Constants.baseUrl, 'Todo/$id/content/$index/isCompleted.json');
     await http.put(url, body: json.encode(isCompleted));
+  }
+
+  identifyTask(String id, bool newValue) {
+    tasks = tasks.map((e) {
+      if (e.id != id) return e;
+      e.content = e.content.map((r) {
+        r.isCompleted = newValue;
+        return r;
+      }).toList();
+      return e;
+    }).toList();
+    notifyListeners();
   }
 
   delete(String id) async {

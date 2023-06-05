@@ -47,6 +47,7 @@ class _TodoItemState extends State<TodoItem> {
             value: activated,
             onChanged: (value) async {
               setState(() => activated = !activated);
+              todoService.identifyTask(widget.id!, activated);
               await todoService.updateOnlyIsCompleted(
                   widget.id!, widget.index!, activated);
             },
