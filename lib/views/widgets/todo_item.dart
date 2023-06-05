@@ -96,11 +96,7 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Eliminar',
               ),
               IconButton(
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: widget.description));
-                  NotificationService.showSnackbar('Copiado al portapapeles',
-                      Colors.green, Icons.info_outline);
-                },
+                onPressed: () => _copiarAlPortapeles(widget.description),
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copiar Todo',
@@ -159,7 +155,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () => print('asdasdsadsa'),
+                      onTap: () => _copiarAlPortapeles(widget.description),
                       child: Row(
                         children: const [
                           Icon(Icons.copy),
@@ -214,5 +210,11 @@ class _TodoItemState extends State<TodoItem> {
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
+  }
+
+  _copiarAlPortapeles(String descripcion) {
+    Clipboard.setData(ClipboardData(text: widget.description));
+    NotificationService.showSnackbar(
+        'Copiado al portapapeles', Colors.green, Icons.info_outline);
   }
 }
