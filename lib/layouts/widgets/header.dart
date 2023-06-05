@@ -34,7 +34,7 @@ class Header extends StatelessWidget {
               const Expanded(child: SearchBar())
             },
             if (size.width > 483) ...[
-              const CustomTextButton(),
+              CustomTextButton(),
             ] else ...[
               const CustomOutlinedButton()
             ]
