@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
 
@@ -95,7 +96,11 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Eliminar',
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: widget.description));
+                  NotificationService.showSnackbar('Copiado al portapapeles',
+                      Colors.green, Icons.info_outline);
+                },
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copiar Todo',
@@ -197,7 +202,7 @@ class _TodoItemState extends State<TodoItem> {
   Future _delete(TodoService todoService) async {
     await todoService.delete(widget.id!);
     NotificationService.showSnackbar(
-        'Tarea Eliminada correctamente!', Colors.green);
+        'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
     await todoService.getAll();
   }
 
@@ -206,7 +211,8 @@ class _TodoItemState extends State<TodoItem> {
     } else {
       await todoService.updateOnlyDescription(
           widget.id!, widget.index!, widget.description);
-      NotificationService.showSnackbar('Actualizado con Exito!', Colors.green);
+      NotificationService.showSnackbar(
+          'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
   }
 }
