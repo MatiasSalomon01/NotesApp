@@ -80,7 +80,10 @@ class _CustomTextButtonState extends State<CustomTextButton> {
                     onPressed: () async {
                       if (controllerTitle.text.isEmpty ||
                           controllerDescription.text.isEmpty) {
-                        print("ERROR LOS INPUTS ESTAN VACIOS");
+                        NotificationService.showSnackbar(
+                            "ERROR LOS INPUTS ESTAN VACIOS",
+                            Colors.red,
+                            Icons.info_outline);
                       } else {
                         final task = Task(
                           content: [
