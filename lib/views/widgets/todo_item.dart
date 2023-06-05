@@ -208,7 +208,7 @@ class _TodoItemState extends State<TodoItem> {
     await todoService.delete(widget.id!);
     NotificationService.showSnackbar(
         'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
-    await todoService.getAll();
+    // await todoService.getAll();
   }
 
   Future _update(TodoService todoService, String firstDescription) async {

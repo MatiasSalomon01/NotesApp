@@ -27,9 +27,9 @@ class TodoService extends ChangeNotifier {
         model.id = key;
         tasks.add(model);
       });
-      notifyListeners();
     }
     isLoading = false;
+    notifyListeners();
   }
 
   getById() {}
@@ -68,5 +68,8 @@ class TodoService extends ChangeNotifier {
   delete(String id) async {
     final url = Uri.https(Constants.baseUrl, 'Todo/$id.json');
     await http.delete(url);
+
+    tasks.removeWhere((element) => element.id == id);
+    notifyListeners();
   }
 }
