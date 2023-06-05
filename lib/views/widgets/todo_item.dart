@@ -211,8 +211,7 @@ class _TodoItemState extends State<TodoItem> {
   }
 
   Future _update(TodoService todoService, String firstDescription) async {
-    if (firstDescription == widget.description) {
-    } else {
+    if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
           widget.id!, widget.index!, widget.description);
       NotificationService.showSnackbar(
