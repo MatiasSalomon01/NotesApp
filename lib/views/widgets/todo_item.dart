@@ -67,6 +67,10 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.only(right: 5),
                     child: TextFormField(
                       initialValue: widget.description,
+                      onEditingComplete: () async {
+                        await _update(todoService, firstDescription);
+                        setState(() => editing = false);
+                      },
                       style: const TextStyle(fontSize: 14),
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(bottom: 12),
@@ -107,13 +111,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(14),
                   ),
                   onPressed: () async {
-                    if (firstDescription == widget.description) {
-                    } else {
-                      await todoService.updateOnlyDescription(
-                          widget.id!, widget.index!, widget.description);
-                      NotificationService.showSnackbar(
-                          'Actualizado con Exito!', Colors.green);
-                    }
+                    await _update(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -179,13 +177,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(10),
                   ),
                   onPressed: () async {
-                    if (firstDescription == widget.description) {
-                    } else {
-                      await todoService.updateOnlyDescription(
-                          widget.id!, widget.index!, widget.description);
-                      NotificationService.showSnackbar(
-                          'Actualizado con Exito!', Colors.green);
-                    }
+                    await _update(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -207,5 +199,14 @@ class _TodoItemState extends State<TodoItem> {
     NotificationService.showSnackbar(
         'Tarea Eliminada correctamente!', Colors.green);
     await todoService.getAll();
+  }
+
+  Future _update(TodoService todoService, String firstDescription) async {
+    if (firstDescription == widget.description) {
+    } else {
+      await todoService.updateOnlyDescription(
+          widget.id!, widget.index!, widget.description);
+      NotificationService.showSnackbar('Actualizado con Exito!', Colors.green);
+    }
   }
 }
