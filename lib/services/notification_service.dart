@@ -12,9 +12,11 @@ class NotificationService {
         children: [
           Icon(icon, color: Colors.white),
           const SizedBox(width: 10),
-          Text(
-            messege,
-            style: const TextStyle(color: Colors.white, fontSize: 20),
+          Expanded(
+            child: Text(
+              messege,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
         ],
       ),
