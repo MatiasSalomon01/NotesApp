@@ -47,9 +47,7 @@ class _TodoItemState extends State<TodoItem> {
             value: activated,
             onChanged: (value) async {
               setState(() => activated = !activated);
-              todoService.identifyTask(widget.id!, activated);
-              await todoService.updateOnlyIsCompleted(
-                  widget.id!, widget.index!, activated);
+              await _updateIsCompleted(todoService);
             },
           ),
           const SizedBox(width: 10),
@@ -72,7 +70,7 @@ class _TodoItemState extends State<TodoItem> {
                       cursorColor: Colors.black,
                       autofocus: true,
                       onEditingComplete: () async {
-                        await _update(todoService, firstDescription);
+                        await _updateDescription(todoService, firstDescription);
                         setState(() => editing = false);
                       },
                       style: const TextStyle(fontSize: 14),
@@ -121,7 +119,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(14),
                   ),
                   onPressed: () async {
-                    await _update(todoService, firstDescription);
+                    await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -187,7 +185,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(10),
                   ),
                   onPressed: () async {
-                    await _update(todoService, firstDescription);
+                    await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -208,16 +206,22 @@ class _TodoItemState extends State<TodoItem> {
     await todoService.delete(widget.id!);
     NotificationService.showSnackbar(
         'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
-    // await todoService.getAll();
   }
 
-  Future _update(TodoService todoService, String firstDescription) async {
+  Future _updateDescription(
+      TodoService todoService, String firstDescription) async {
     if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
           widget.id!, widget.index!, widget.description);
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
+  }
+
+  Future _updateIsCompleted(TodoService todoService) async {
+    todoService.identifyTask(widget.id!, activated);
+    await todoService.updateOnlyIsCompleted(
+        widget.id!, widget.index!, activated);
   }
 
   _copiarAlPortapeles(String descripcion) {

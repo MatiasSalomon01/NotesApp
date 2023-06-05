@@ -89,7 +89,6 @@ class _TodoCreationModalState extends State<TodoCreationModal> {
               Navigator.of(context).pop();
               NotificationService.showSnackbar('Tarea Creada correctamente!',
                   Colors.green, Icons.info_outline);
-              await todoService.getAll();
             }
           },
           child: const Text('Crear',
