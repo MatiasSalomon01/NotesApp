@@ -60,7 +60,7 @@ class _TodoItemState extends State<TodoItem> {
                 )
               : Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
+                    padding: const EdgeInsets.only(right: 5),
                     child: TextFormField(
                       initialValue: widget.description,
                       style: const TextStyle(fontSize: 14),
@@ -118,52 +118,79 @@ class _TodoItemState extends State<TodoItem> {
                   ),
                 ),
               ),
-              const SizedBox(width: 20),
             ],
             const SizedBox(width: 10),
           ] else ...[
-            PopupMenuButton(
-              splashRadius: 18,
-              padding: const EdgeInsets.all(0),
-              offset: const Offset(0, 40),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+            if (!editing) ...[
+              PopupMenuButton(
+                splashRadius: 18,
+                padding: const EdgeInsets.all(0),
+                offset: const Offset(0, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      onTap: () => setState(() => editing = true),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.edit_outlined),
+                          SizedBox(width: 10),
+                          Text('Editar'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () async => await _delete(todoService),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.delete),
+                          SizedBox(width: 10),
+                          Text('Eliminar'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () => print('asdasdsadsa'),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.copy),
+                          SizedBox(width: 10),
+                          Text('Copiar Todo'),
+                        ],
+                      ),
+                    ),
+                  ];
+                },
               ),
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    onTap: () => print('asdasdsadsa'),
-                    child: Row(
-                      children: const [
-                        Icon(Icons.edit_outlined),
-                        SizedBox(width: 10),
-                        Text('Editar'),
-                      ],
-                    ),
+            ] else ...[
+              Tooltip(
+                message: 'Confirmar',
+                waitDuration: const Duration(milliseconds: 800),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(10),
                   ),
-                  PopupMenuItem(
-                    onTap: () async => await _delete(todoService),
-                    child: Row(
-                      children: const [
-                        Icon(Icons.delete),
-                        SizedBox(width: 10),
-                        Text('Eliminar'),
-                      ],
-                    ),
+                  onPressed: () async {
+                    if (firstDescription == widget.description) {
+                    } else {
+                      await todoService.updateOnlyDescription(
+                          widget.id!, widget.index!, widget.description);
+                      NotificationService.showSnackbar(
+                          'Actualizado con Exito!', Colors.green);
+                    }
+                    setState(() => editing = false);
+                  },
+                  child: const Icon(
+                    Icons.done,
+                    color: Colors.white,
                   ),
-                  PopupMenuItem(
-                    onTap: () => print('asdasdsadsa'),
-                    child: Row(
-                      children: const [
-                        Icon(Icons.copy),
-                        SizedBox(width: 10),
-                        Text('Copiar Todo'),
-                      ],
-                    ),
-                  ),
-                ];
-              },
-            ),
+                ),
+              ),
+            ],
             const SizedBox(width: 5),
           ],
         ],
