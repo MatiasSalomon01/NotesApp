@@ -23,7 +23,7 @@ class Constants {
 
   static double? setHeaderPlatformHeight(TargetPlatform platform) {
     if (platform == TargetPlatform.android || platform == TargetPlatform.iOS) {
-      return null;
+      return 95;
     } else {
       return 55;
     }
