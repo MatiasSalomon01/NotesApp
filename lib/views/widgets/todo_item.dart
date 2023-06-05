@@ -68,6 +68,8 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.only(right: 5),
                     child: TextFormField(
                       initialValue: widget.description,
+                      cursorColor: Colors.black,
+                      autofocus: true,
                       onEditingComplete: () async {
                         await _update(todoService, firstDescription);
                         setState(() => editing = false);
@@ -75,6 +77,12 @@ class _TodoItemState extends State<TodoItem> {
                       style: const TextStyle(fontSize: 14),
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(bottom: 12),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 1.2,
+                          ),
+                        ),
                         isCollapsed: true,
                       ),
                       onChanged: (value) => widget.description = value,
