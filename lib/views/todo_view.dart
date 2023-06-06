@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/layouts/widgets/custom_text_button.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:notes_app/views/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
@@ -90,11 +91,16 @@ class TodoView extends StatelessWidget {
                           separatorBuilder: (BuildContext context, int index) {
                             return IntrinsicHeight(
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 3),
+                                padding: const EdgeInsets.only(
+                                    left: 5, bottom: 15, top: 5),
                                 child: Row(
-                                  children: const [
-                                    VerticalDivider(color: Colors.grey),
-                                    SizedBox(height: 15)
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    // VerticalDivider(color: Colors.grey),
+                                    CustomTextButton2(
+                                        description: "Dato estatico",
+                                        id: index.toString()),
+                                    // SizedBox(height: 15)
                                   ],
                                 ),
                               ),
