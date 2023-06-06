@@ -72,6 +72,12 @@ class TodoService extends ChangeNotifier {
     await http.put(url, body: json.encode(isCompleted));
   }
 
+  updateContentData(Task task) async {
+    final url = Uri.https(Constants.baseUrl, '/Todo/${task.id}/.json');
+    final response = await http.put(url, body: task.toRawJson());
+    print(response.statusCode);
+  }
+
   identifyTask(String id, bool newValue) {
     tasks = tasks.map((e) {
       if (e.id != id) return e;

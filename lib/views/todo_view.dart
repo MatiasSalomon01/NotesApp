@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/layouts/widgets/custom_text_button.dart';
+import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:notes_app/views/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
@@ -74,13 +75,39 @@ class TodoView extends StatelessWidget {
                                     itemCount:
                                         todoService.tasks[index1].contentCount,
                                     itemBuilder: (context, index2) {
-                                      return TodoItem(
-                                        id: todoService.tasks[index1].id,
-                                        description: todoService.tasks[index1]
-                                            .content[index2].description,
-                                        isCompleted: todoService.tasks[index1]
-                                            .content[index2].isCompleted,
-                                        index: index2,
+                                      return Column(
+                                        children: [
+                                          TodoItem(
+                                            id: todoService.tasks[index1].id,
+                                            description: todoService
+                                                .tasks[index1]
+                                                .content[index2]
+                                                .description,
+                                            isCompleted: todoService
+                                                .tasks[index1]
+                                                .content[index2]
+                                                .isCompleted,
+                                            index: index2,
+                                          ),
+                                          if (index2 ==
+                                              todoService.tasks[index1]
+                                                      .contentCount -
+                                                  1)
+                                            CustomTextButton2(
+                                              task: Task(
+                                                content: todoService
+                                                    .tasks[index1].content,
+                                                contentCount: todoService
+                                                    .tasks[index1].contentCount,
+                                                date: todoService
+                                                    .tasks[index1].date,
+                                                title: todoService
+                                                    .tasks[index1].title,
+                                                id: todoService
+                                                    .tasks[index1].id!,
+                                              ),
+                                            ),
+                                        ],
                                       );
                                     },
                                   ),
@@ -97,9 +124,10 @@ class TodoView extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     // VerticalDivider(color: Colors.grey),
-                                    CustomTextButton2(
-                                        description: "Dato estatico",
-                                        index: index),
+                                    // CustomTextButton2(
+                                    //   description: "Dato estatico",
+                                    //   index: index,
+                                    // ),
                                     // SizedBox(height: 15)
                                   ],
                                 ),
