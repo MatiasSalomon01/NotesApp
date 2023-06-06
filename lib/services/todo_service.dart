@@ -8,12 +8,17 @@ class TodoService extends ChangeNotifier {
   List<Task> tasks = [];
   bool isLoading = false;
 
+  Map<int, String> indexMap = {};
+
+  List<dynamic> data = [];
+
   TodoService() {
     getAll();
   }
 
   getAll() async {
     isLoading = true;
+    int count = 0;
     tasks.clear();
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.get(url);
@@ -24,9 +29,21 @@ class TodoService extends ChangeNotifier {
         final model = Task.fromJson(value);
         model.id = key;
         tasks.add(model);
+
+        var countId = {count: key};
+        data.add(countId);
+
+        count++;
       });
     }
+
     isLoading = false;
+
+    data.forEach((element) {
+      Map<int, String> x = element;
+      indexMap.addAll(x);
+    });
+
     notifyListeners();
   }
 
