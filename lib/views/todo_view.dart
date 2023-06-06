@@ -99,7 +99,7 @@ class TodoView extends StatelessWidget {
                                     // VerticalDivider(color: Colors.grey),
                                     CustomTextButton2(
                                         description: "Dato estatico",
-                                        id: index.toString()),
+                                        index: index),
                                     // SizedBox(height: 15)
                                   ],
                                 ),

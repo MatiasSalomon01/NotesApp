@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/models/models.dart';
+import 'package:notes_app/services/todo_service.dart';
 import 'package:notes_app/views/widgets/todo_item.dart';
+import 'package:provider/provider.dart';
 
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({super.key});
@@ -45,8 +47,9 @@ class CustomTextButton extends StatelessWidget {
 
 class CustomTextButton2 extends StatefulWidget {
   final String description;
-  final String? id;
-  const CustomTextButton2({super.key, required this.description, this.id});
+  final int index;
+  const CustomTextButton2(
+      {super.key, required this.description, required this.index});
 
   @override
   State<CustomTextButton2> createState() => _CustomTextButton2State();
@@ -56,6 +59,7 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
   bool change = false;
   @override
   Widget build(BuildContext context) {
+    final todoService = Provider.of<TodoService>(context);
     return change == false
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -95,7 +99,6 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                       autofocus: true,
                       onEditingComplete: () async {
                         setState(() => change = false);
-                        print(widget.id);
 
                         // final task = Task(
                         //   content: [
@@ -120,7 +123,7 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                         ),
                         isCollapsed: true,
                       ),
-                      onChanged: (value) => print(value),
+                      onChanged: (value) {},
                     ),
                   ),
                 ),
@@ -135,6 +138,7 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                     ),
                     onPressed: () async {
                       setState(() => change = false);
+                      print(todoService.indexMap[widget.index]);
                       // await _updateDescription(todoService, firstDescription);
                       // setState(() => editing = false);
                     },
