@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
 
@@ -46,8 +47,7 @@ class _TodoItemState extends State<TodoItem> {
             value: activated,
             onChanged: (value) async {
               setState(() => activated = !activated);
-              await todoService.updateOnlyIsCompleted(
-                  widget.id!, widget.index!, activated);
+              await _updateIsCompleted(todoService);
             },
           ),
           const SizedBox(width: 10),
@@ -67,13 +67,21 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.only(right: 5),
                     child: TextFormField(
                       initialValue: widget.description,
+                      cursorColor: Colors.black,
+                      autofocus: true,
                       onEditingComplete: () async {
-                        await _update(todoService, firstDescription);
+                        await _updateDescription(todoService, firstDescription);
                         setState(() => editing = false);
                       },
                       style: const TextStyle(fontSize: 14),
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(bottom: 12),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 1.2,
+                          ),
+                        ),
                         isCollapsed: true,
                       ),
                       onChanged: (value) => widget.description = value,
@@ -95,7 +103,7 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Eliminar',
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => _copiarAlPortapeles(widget.description),
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copiar Todo',
@@ -111,7 +119,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(14),
                   ),
                   onPressed: () async {
-                    await _update(todoService, firstDescription);
+                    await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -154,7 +162,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () => print('asdasdsadsa'),
+                      onTap: () => _copiarAlPortapeles(widget.description),
                       child: Row(
                         children: const [
                           Icon(Icons.copy),
@@ -177,7 +185,7 @@ class _TodoItemState extends State<TodoItem> {
                     padding: const EdgeInsets.all(10),
                   ),
                   onPressed: () async {
-                    await _update(todoService, firstDescription);
+                    await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
                   child: const Icon(
@@ -197,16 +205,28 @@ class _TodoItemState extends State<TodoItem> {
   Future _delete(TodoService todoService) async {
     await todoService.delete(widget.id!);
     NotificationService.showSnackbar(
-        'Tarea Eliminada correctamente!', Colors.green);
-    await todoService.getAll();
+        'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
   }
 
-  Future _update(TodoService todoService, String firstDescription) async {
-    if (firstDescription == widget.description) {
-    } else {
+  Future _updateDescription(
+      TodoService todoService, String firstDescription) async {
+    if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
           widget.id!, widget.index!, widget.description);
-      NotificationService.showSnackbar('Actualizado con Exito!', Colors.green);
+      NotificationService.showSnackbar(
+          'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
+  }
+
+  Future _updateIsCompleted(TodoService todoService) async {
+    todoService.identifyTask(widget.id!, activated);
+    await todoService.updateOnlyIsCompleted(
+        widget.id!, widget.index!, activated);
+  }
+
+  _copiarAlPortapeles(String descripcion) {
+    Clipboard.setData(ClipboardData(text: widget.description));
+    NotificationService.showSnackbar(
+        'Copiado al portapapeles', Colors.green, Icons.info_outline);
   }
 }

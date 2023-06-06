@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
@@ -26,9 +25,9 @@ class TodoService extends ChangeNotifier {
         model.id = key;
         tasks.add(model);
       });
-      notifyListeners();
     }
     isLoading = false;
+    notifyListeners();
   }
 
   getById() {}
@@ -37,7 +36,11 @@ class TodoService extends ChangeNotifier {
     final url = Uri.https(Constants.baseUrl, 'Todo.json');
     final response = await http.post(url, body: task.toRawJson());
     final Map<String, dynamic> map = json.decode(response.body);
-    return map.values.first.toString();
+    if (response.statusCode == 200) {
+      task.id = map["name"];
+      tasks.add(task);
+    }
+    notifyListeners();
   }
 
   updateOnlyDescription(String id, int index, String description) async {
@@ -52,8 +55,23 @@ class TodoService extends ChangeNotifier {
     await http.put(url, body: json.encode(isCompleted));
   }
 
+  identifyTask(String id, bool newValue) {
+    tasks = tasks.map((e) {
+      if (e.id != id) return e;
+      e.content = e.content.map((r) {
+        r.isCompleted = newValue;
+        return r;
+      }).toList();
+      return e;
+    }).toList();
+    notifyListeners();
+  }
+
   delete(String id) async {
     final url = Uri.https(Constants.baseUrl, 'Todo/$id.json');
     await http.delete(url);
+
+    tasks.removeWhere((element) => element.id == id);
+    notifyListeners();
   }
 }

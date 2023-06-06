@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/modals/modals.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   const CustomOutlinedButton({super.key});
@@ -12,7 +13,14 @@ class CustomOutlinedButton extends StatelessWidget {
         side: MaterialStateProperty.all(BorderSide.none),
         shape: MaterialStateProperty.all(const CircleBorder()),
       ),
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const TodoCreationModal();
+          },
+        );
+      },
       child: const Icon(
         Icons.add,
         color: Colors.black,

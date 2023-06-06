@@ -9,10 +9,13 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
     return Container(
-      // width: size.width > 412 ? 300 : 200,
       width: width,
-      height: 30,
+      height:
+          (platform == TargetPlatform.android || platform == TargetPlatform.iOS)
+              ? 40
+              : 30,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black38),
         borderRadius: BorderRadius.circular(8),
