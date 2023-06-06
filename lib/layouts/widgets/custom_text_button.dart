@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/todo_service.dart';
-import 'package:notes_app/views/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -97,12 +95,8 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                   child: TextFormField(
                     cursorColor: Colors.black,
                     autofocus: true,
-                    onEditingComplete: () async {
-                      if (description.isNotEmpty) {
-                        setState(() => change = false);
-                        print(description);
-                      }
-                    },
+                    onEditingComplete: () async =>
+                        await _updateContent(todoService, description),
                     style: const TextStyle(fontSize: 14),
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(bottom: 12),
@@ -127,25 +121,8 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(14),
                   ),
-                  onPressed: () async {
-                    if (description.isNotEmpty) {
-                      setState(() => change = false);
-                      // widget.task.content.forEach((element) {
-                      //   data.add(Content(
-                      //     description: element.description,
-                      //     isCompleted: element.isCompleted,
-                      //   ));
-                      // });
-
-                      widget.task.content.add(
-                        Content(description: description, isCompleted: false),
-                      );
-                    }
-                    widget.task.contentCount++;
-                    await todoService.updateContentData(widget.task);
-                    // await _updateDescription(todoService, firstDescription);
-                    // setState(() => editing = false);
-                  },
+                  onPressed: () async =>
+                      await _updateContent(todoService, description),
                   child: const Icon(
                     Icons.done,
                     color: Colors.white,
@@ -154,5 +131,18 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
               ),
             ],
           );
+  }
+
+  _updateContent(TodoService todoService, String description) async {
+    if (description.isNotEmpty) {
+      setState(() => change = false);
+
+      widget.task.content.add(
+        Content(description: description, isCompleted: false),
+      );
+    }
+
+    widget.task.contentCount++;
+    await todoService.updateContentData(widget.task);
   }
 }
