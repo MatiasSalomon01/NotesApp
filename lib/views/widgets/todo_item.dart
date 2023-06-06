@@ -221,7 +221,7 @@ class _TodoItemState extends State<TodoItem> {
       TodoService todoService, String firstDescription) async {
     if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
-          widget.id!, widget.index!, widget.description);
+          widget.task.id!, widget.index!, widget.description);
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
@@ -230,7 +230,7 @@ class _TodoItemState extends State<TodoItem> {
   Future _updateIsCompleted(TodoService todoService) async {
     todoService.identifyTask(widget.id!, activated);
     await todoService.updateOnlyIsCompleted(
-        widget.id!, widget.index!, activated);
+        widget.task.id!, widget.index!, activated);
   }
 
   _copiarAlPortapeles(String descripcion) {
