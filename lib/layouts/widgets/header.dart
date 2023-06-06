@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/layouts/widgets/widgets.dart';
+import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/providers/main_layout_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,13 @@ class Header extends StatelessWidget {
             if (size.width > 483) ...[
               const CustomTextButton(),
             ] else ...[
-              const CustomOutlinedButton()
+              CustomOutlinedButton(
+                icon: Icons.add,
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => const TodoCreationModal(),
+                ),
+              )
             ]
           ],
         ),

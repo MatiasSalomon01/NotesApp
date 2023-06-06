@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/layouts/widgets/custom_outlined_button.dart';
 import 'package:notes_app/layouts/widgets/custom_text_button.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
@@ -52,13 +53,31 @@ class TodoView extends StatelessWidget {
                                               todoService.tasks[index1].title,
                                           waitDuration:
                                               const Duration(milliseconds: 800),
-                                          child: Text(
-                                            " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
-                                            style: const TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.grey,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.grey,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              // const SizedBox(width: 10),
+                                              // const Icon(
+                                              //   Icons.delete,
+                                              //   color: Colors.grey,
+                                              // ),
+                                              CustomOutlinedButton(
+                                                icon: Icons.delete,
+                                                onPressed: () async =>
+                                                    await _delete(
+                                                  todoService,
+                                                  todoService.tasks[index1].id!,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -78,7 +97,17 @@ class TodoView extends StatelessWidget {
                                       return Column(
                                         children: [
                                           TodoItem(
-                                            id: todoService.tasks[index1].id,
+                                            task: Task(
+                                              id: todoService.tasks[index1].id,
+                                              title: todoService
+                                                  .tasks[index1].title,
+                                              date: todoService
+                                                  .tasks[index1].date,
+                                              contentCount: todoService
+                                                  .tasks[index1].contentCount,
+                                              content: todoService
+                                                  .tasks[index1].content,
+                                            ),
                                             description: todoService
                                                 .tasks[index1]
                                                 .content[index2]
@@ -147,5 +176,11 @@ class TodoView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _delete(TodoService todoService, String id) async {
+    await todoService.delete(id);
+    NotificationService.showSnackbar(
+        'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
   }
 }

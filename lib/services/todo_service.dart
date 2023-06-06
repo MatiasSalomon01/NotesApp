@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:notes_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:notes_app/models/models.dart';
@@ -105,5 +106,29 @@ class TodoService extends ChangeNotifier {
 
     tasks.removeWhere((element) => element.id == id);
     notifyListeners();
+  }
+
+  deleteByContentIndex(Task task, int index) async {
+    final url = Uri.https(Constants.baseUrl, 'Todo/${task.id}.json');
+    late Response response;
+    if (task.contentCount == 0) {
+      delete(task.id!);
+    } else {
+      response = await http.put(url, body: task.toRawJson());
+      if (response.statusCode == 200) {
+        tasks = tasks.map((e) {
+          if (e.id != task.id) return e;
+          e = task;
+          return e;
+        }).toList();
+      }
+      notifyListeners();
+    }
+  }
+
+  updateContentCount(String id, int count) async {
+    final url = Uri.https(Constants.baseUrl, '/Todo/$id/contentCount.json');
+    final response = await http.put(url, body: json.encode(count));
+    // print(response.statusCode);
   }
 }

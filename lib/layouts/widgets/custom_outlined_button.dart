@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/modals/modals.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  const CustomOutlinedButton({super.key});
+  final IconData icon;
+  final Function onPressed;
+  const CustomOutlinedButton(
+      {super.key, required this.onPressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +16,9 @@ class CustomOutlinedButton extends StatelessWidget {
         side: MaterialStateProperty.all(BorderSide.none),
         shape: MaterialStateProperty.all(const CircleBorder()),
       ),
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const TodoCreationModal();
-          },
-        );
-      },
-      child: const Icon(
-        Icons.add,
+      onPressed: () => onPressed(),
+      child: Icon(
+        icon,
         color: Colors.black,
       ),
     );
