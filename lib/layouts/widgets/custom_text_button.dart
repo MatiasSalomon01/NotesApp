@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/modals/modals.dart';
 
 class CustomTextButton extends StatelessWidget {
-  CustomTextButton({super.key});
+  const CustomTextButton({super.key});
 
   @override
   Widget build(BuildContext context) {

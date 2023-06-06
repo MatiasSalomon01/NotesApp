@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/constants.dart';
 import 'package:http/http.dart' as http;
