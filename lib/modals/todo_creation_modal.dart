@@ -45,6 +45,7 @@ class _TodoCreationModalState extends State<TodoCreationModal> {
                   borderSide: BorderSide(color: Colors.black),
                 ),
               ),
+              onEditingComplete: () async => await _create(todoService),
             ),
             TextFormField(
               controller: controllerDescription,
@@ -55,6 +56,7 @@ class _TodoCreationModalState extends State<TodoCreationModal> {
                   borderSide: BorderSide(color: Colors.black),
                 ),
               ),
+              onEditingComplete: () async => await _create(todoService),
             ),
           ],
         ),
@@ -65,32 +67,7 @@ class _TodoCreationModalState extends State<TodoCreationModal> {
             overlayColor: MaterialStateProperty.all(Colors.grey[400]),
             backgroundColor: MaterialStateProperty.all(Colors.grey[300]),
           ),
-          onPressed: () async {
-            if (controllerTitle.text.isEmpty ||
-                controllerDescription.text.isEmpty) {
-              NotificationService.showSnackbar("ERROR LOS INPUTS ESTAN VACIOS",
-                  Colors.red, Icons.info_outline);
-            } else {
-              final task = Task(
-                content: [
-                  Content(
-                    description: controllerDescription.text,
-                    isCompleted: false,
-                  )
-                ],
-                contentCount: 1,
-                date: Constants.currentDate,
-                title: controllerTitle.text,
-              );
-
-              await todoService.create(task);
-
-              // ignore: use_build_context_synchronously
-              Navigator.of(context).pop();
-              NotificationService.showSnackbar('Tarea Creada correctamente!',
-                  Colors.green, Icons.info_outline);
-            }
-          },
+          onPressed: () async => await _create(todoService),
           child: const Text('Crear',
               style: TextStyle(color: Colors.black, fontSize: 15)),
         ),
@@ -109,5 +86,31 @@ class _TodoCreationModalState extends State<TodoCreationModal> {
         )
       ],
     );
+  }
+
+  Future _create(TodoService todoService) async {
+    if (controllerTitle.text.isEmpty || controllerDescription.text.isEmpty) {
+      NotificationService.showSnackbar(
+          "ERROR LOS INPUTS ESTAN VACIOS", Colors.red, Icons.info_outline);
+    } else {
+      final task = Task(
+        content: [
+          Content(
+            description: controllerDescription.text,
+            isCompleted: false,
+          )
+        ],
+        contentCount: 1,
+        date: Constants.currentDate,
+        title: controllerTitle.text,
+      );
+
+      await todoService.create(task);
+
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+      NotificationService.showSnackbar(
+          'Tarea Creada correctamente!', Colors.green, Icons.info_outline);
+    }
   }
 }
