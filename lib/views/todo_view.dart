@@ -46,6 +46,8 @@ class TodoView extends StatelessWidget {
                                     ),
                                     Expanded(
                                       child: Tooltip(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 10),
                                         message:
                                             todoService.tasks[index1].title,
                                         waitDuration:
