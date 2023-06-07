@@ -67,10 +67,18 @@ class TodoService extends ChangeNotifier {
     await http.put(url, body: json.encode(description));
   }
 
-  updateOnlyIsCompleted(String id, int index, bool isCompleted) async {
+  updateOnlyIsCompleted(Task task, int index, bool isCompleted) async {
     final url = Uri.https(
-        Constants.baseUrl, 'Todo/$id/content/$index/isCompleted.json');
-    await http.put(url, body: json.encode(isCompleted));
+        Constants.baseUrl, 'Todo/${task.id}/content/$index/isCompleted.json');
+    final response = await http.put(url, body: json.encode(isCompleted));
+    if (response.statusCode == 200) {
+      tasks = tasks.map((e) {
+        if (e.id != task.id) return e;
+        e.content[index].isCompleted = isCompleted;
+        return e;
+      }).toList();
+    }
+    notifyListeners();
   }
 
   updateContentData(Task task) async {
@@ -85,18 +93,6 @@ class TodoService extends ChangeNotifier {
         return e;
       }).toList();
     }
-    notifyListeners();
-  }
-
-  identifyTask(String id, bool newValue) {
-    tasks = tasks.map((e) {
-      if (e.id != id) return e;
-      e.content = e.content.map((r) {
-        r.isCompleted = newValue;
-        return r;
-      }).toList();
-      return e;
-    }).toList();
     notifyListeners();
   }
 

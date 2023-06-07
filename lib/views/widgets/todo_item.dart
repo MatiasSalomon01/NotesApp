@@ -227,9 +227,10 @@ class _TodoItemState extends State<TodoItem> {
   }
 
   Future _updateIsCompleted(TodoService todoService) async {
-    todoService.identifyTask(widget.task.id!, activated);
-    await todoService.updateOnlyIsCompleted(
-        widget.task.id!, widget.index!, activated);
+    var task = todoService.tasks
+        .where((element) => element.id == widget.task.id)
+        .first;
+    await todoService.updateOnlyIsCompleted(task, widget.index!, activated);
   }
 
   _copiarAlPortapeles(String descripcion) {
