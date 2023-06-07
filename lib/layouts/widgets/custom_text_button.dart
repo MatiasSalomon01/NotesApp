@@ -77,8 +77,8 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                         right: 8, left: 2, bottom: 2, top: 2),
                     decoration: BoxDecoration(
                         color: isHover
-                            ? Colors.grey.withOpacity(0.5)
-                            : Colors.transparent,
+                            ? Colors.green.withOpacity(0.6)
+                            : Colors.green.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(4)),
                     child: Row(
                       children: const [
@@ -141,7 +141,10 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
   }
 
   _updateContent(TodoService todoService, String description) async {
-    setState(() => change = false);
+    setState(() {
+      isHover = false;
+      change = false;
+    });
     if (description.isNotEmpty) {
       widget.task.content.add(
         Content(description: description, isCompleted: false),
