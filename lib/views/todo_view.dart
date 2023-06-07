@@ -58,7 +58,7 @@ class TodoView extends StatelessWidget {
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
+                                                " Creado el: ${todoService.tasks[index1].date} • ${todoService.tasks[index1].title}",
                                                 maxLines: 2,
                                                 overflow: TextOverflow.ellipsis,
                                                 softWrap: true,
@@ -163,23 +163,7 @@ class TodoView extends StatelessWidget {
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) {
-                            return IntrinsicHeight(
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5, bottom: 15, top: 5),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    // VerticalDivider(color: Colors.grey),
-                                    // CustomTextButton2(
-                                    //   description: "Dato estatico",
-                                    //   index: index,
-                                    // ),
-                                    // SizedBox(height: 50)
-                                  ],
-                                ),
-                              ),
-                            );
+                            return const SizedBox(height: 15);
                           },
                         ),
                       )

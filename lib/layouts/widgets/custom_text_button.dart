@@ -56,40 +56,40 @@ class CustomTextButton2 extends StatefulWidget {
 
 class _CustomTextButton2State extends State<CustomTextButton2> {
   bool change = false;
+  bool isHover = false;
+  String description = "";
   @override
   Widget build(BuildContext context) {
     final todoService = Provider.of<TodoService>(context);
-    String description = "";
     return change == false
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: Row(
-              children: [
-                TextButton(
-                  style: ButtonStyle(
-                    overlayColor: MaterialStateProperty.all(Colors.grey[300]),
-                  ),
-                  onPressed: () {
-                    setState(() => change = true);
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.add,
-                        color: Colors.black,
-                      ),
-                      Text(
-                        "Nueva Tarea",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ],
+        ? Row(
+            children: [
+              MouseRegion(
+                onEnter: (event) => setState(() => isHover = true),
+                onExit: (event) => setState(() => isHover = false),
+                child: GestureDetector(
+                  onTap: () => setState(() => change = true),
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      left: 2,
+                    ),
+                    padding: const EdgeInsets.only(
+                        right: 8, left: 2, bottom: 2, top: 2),
+                    decoration: BoxDecoration(
+                        color: isHover
+                            ? Colors.grey.withOpacity(0.5)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.add),
+                        Text('Nueva Tarea'),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           )
         : Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
