@@ -3,6 +3,7 @@ import 'package:notes_app/layouts/widgets/custom_outlined_button.dart';
 import 'package:notes_app/layouts/widgets/custom_text_button.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
+import 'package:notes_app/views/widgets/title_date_item.dart';
 import 'package:notes_app/views/widgets/todo_item.dart';
 import 'package:provider/provider.dart';
 
@@ -44,45 +45,11 @@ class TodoView extends StatelessWidget {
                                       size: 23,
                                       color: Colors.black26,
                                     ),
-                                    Expanded(
-                                      child: Tooltip(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        message:
-                                            todoService.tasks[index1].title,
-                                        waitDuration:
-                                            const Duration(milliseconds: 800),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                " Creado el: ${todoService.tasks[index1].date} • ${todoService.tasks[index1].title}",
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                softWrap: true,
-                                                style: const TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                            ),
-                                            CustomOutlinedButton(
-                                              icon: Icons.delete_forever_sharp,
-                                              size: 20,
-                                              onPressed: () async =>
-                                                  await _delete(
-                                                todoService,
-                                                todoService.tasks[index1].id!,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    TitleDateItem(
+                                      date: todoService.tasks[index1].date,
+                                      title: todoService.tasks[index1].title,
+                                      id: todoService.tasks[index1].id,
+                                    )
                                   ],
                                 ),
                                 Padding(
@@ -180,11 +147,5 @@ class TodoView extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future _delete(TodoService todoService, String id) async {
-    await todoService.delete(id);
-    NotificationService.showSnackbar(
-        'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
   }
 }
