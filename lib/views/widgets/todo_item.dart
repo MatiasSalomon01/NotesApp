@@ -212,7 +212,6 @@ class _TodoItemState extends State<TodoItem> {
     task.content.removeAt(index);
     task.contentCount--;
     await todoService.deleteByContentIndex(task, index);
-    // await todoService.delete(widget.id!);
     NotificationService.showSnackbar(
         'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
   }
@@ -228,7 +227,7 @@ class _TodoItemState extends State<TodoItem> {
   }
 
   Future _updateIsCompleted(TodoService todoService) async {
-    todoService.identifyTask(widget.id!, activated);
+    todoService.identifyTask(widget.task.id!, activated);
     await todoService.updateOnlyIsCompleted(
         widget.task.id!, widget.index!, activated);
   }
