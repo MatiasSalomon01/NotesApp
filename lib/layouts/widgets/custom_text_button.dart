@@ -62,7 +62,7 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
     String description = "";
     return change == false
         ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Row(
               children: [
                 TextButton(
@@ -97,7 +97,7 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 5, left: 15),
+                    padding: const EdgeInsets.only(right: 5),
                     child: TextFormField(
                       cursorColor: Colors.black,
                       autofocus: true,

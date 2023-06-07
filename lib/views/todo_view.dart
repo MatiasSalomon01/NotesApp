@@ -94,6 +94,8 @@ class TodoView extends StatelessWidget {
                                         todoService.tasks[index1].contentCount,
                                     itemBuilder: (context, index2) {
                                       return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           TodoItem(
                                             task: Task(
@@ -121,20 +123,36 @@ class TodoView extends StatelessWidget {
                                               todoService.tasks[index1]
                                                       .contentCount -
                                                   1) ...[
-                                            CustomTextButton2(
-                                              task: Task(
-                                                content: todoService
-                                                    .tasks[index1].content,
-                                                contentCount: todoService
-                                                    .tasks[index1].contentCount,
-                                                date: todoService
-                                                    .tasks[index1].date,
-                                                title: todoService
-                                                    .tasks[index1].title,
-                                                id: todoService
-                                                    .tasks[index1].id!,
+                                            SizedBox(
+                                              height: 35,
+                                              child: Row(
+                                                children: [
+                                                  const VerticalDivider(
+                                                    color: Colors.grey,
+                                                  ),
+                                                  Expanded(
+                                                    child: CustomTextButton2(
+                                                      task: Task(
+                                                        content: todoService
+                                                            .tasks[index1]
+                                                            .content,
+                                                        contentCount:
+                                                            todoService
+                                                                .tasks[index1]
+                                                                .contentCount,
+                                                        date: todoService
+                                                            .tasks[index1].date,
+                                                        title: todoService
+                                                            .tasks[index1]
+                                                            .title,
+                                                        id: todoService
+                                                            .tasks[index1].id!,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
+                                            )
                                           ]
                                         ],
                                       );
