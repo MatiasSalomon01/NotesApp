@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
 
@@ -8,12 +9,14 @@ class TodoItem extends StatefulWidget {
   String description;
   final bool isCompleted;
   int? index;
+  final Task task;
   TodoItem({
     super.key,
     this.id,
     this.index,
     required this.description,
     required this.isCompleted,
+    required this.task,
   });
 
   @override
@@ -97,7 +100,8 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Editar',
               ),
               IconButton(
-                onPressed: () async => await _delete(todoService),
+                onPressed: () async => await deleteByContentIndex(
+                    todoService, widget.task, widget.index!),
                 splashRadius: 20,
                 icon: const Icon(Icons.delete),
                 tooltip: 'Eliminar',
@@ -152,7 +156,8 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () async => await _delete(todoService),
+                      onTap: () async => deleteByContentIndex(
+                          todoService, widget.task, widget.index!),
                       child: Row(
                         children: const [
                           Icon(Icons.delete),
@@ -202,8 +207,11 @@ class _TodoItemState extends State<TodoItem> {
     );
   }
 
-  Future _delete(TodoService todoService) async {
-    await todoService.delete(widget.id!);
+  Future deleteByContentIndex(
+      TodoService todoService, Task task, int index) async {
+    task.content.removeAt(index);
+    task.contentCount--;
+    await todoService.deleteByContentIndex(task, index);
     NotificationService.showSnackbar(
         'Tarea Eliminada correctamente!', Colors.green, Icons.info_outline);
   }
@@ -212,16 +220,17 @@ class _TodoItemState extends State<TodoItem> {
       TodoService todoService, String firstDescription) async {
     if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
-          widget.id!, widget.index!, widget.description);
+          widget.task.id!, widget.index!, widget.description);
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
   }
 
   Future _updateIsCompleted(TodoService todoService) async {
-    todoService.identifyTask(widget.id!, activated);
-    await todoService.updateOnlyIsCompleted(
-        widget.id!, widget.index!, activated);
+    var task = todoService.tasks
+        .where((element) => element.id == widget.task.id)
+        .first;
+    await todoService.updateOnlyIsCompleted(task, widget.index!, activated);
   }
 
   _copiarAlPortapeles(String descripcion) {
