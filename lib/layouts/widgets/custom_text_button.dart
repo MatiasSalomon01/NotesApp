@@ -63,28 +63,32 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
     return change == false
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextButton(
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.grey[300]),
-              ),
-              onPressed: () {
-                setState(() => change = true);
-              },
-              child: Row(
-                children: const [
-                  Icon(
-                    Icons.add,
-                    color: Colors.black,
+            child: Row(
+              children: [
+                TextButton(
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.grey[300]),
                   ),
-                  Text(
-                    "Nueva Tarea",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                    ),
+                  onPressed: () {
+                    setState(() => change = true);
+                  },
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                      Text(
+                        "Nueva Tarea",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )
         : Container(
