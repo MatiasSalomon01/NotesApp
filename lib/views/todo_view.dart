@@ -45,40 +45,39 @@ class TodoView extends StatelessWidget {
                                       color: Colors.black26,
                                     ),
                                     Expanded(
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: Tooltip(
-                                          message:
-                                              todoService.tasks[index1].title,
-                                          waitDuration:
-                                              const Duration(milliseconds: 800),
-                                          child: Row(
-                                            children: [
-                                              Text(
+                                      child: Tooltip(
+                                        message:
+                                            todoService.tasks[index1].title,
+                                        waitDuration:
+                                            const Duration(milliseconds: 800),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
                                                 " Creado el: ${todoService.tasks[index1].date} - ${todoService.tasks[index1].title}",
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                softWrap: true,
                                                 style: const TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.grey,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
-                                              // const SizedBox(width: 10),
-                                              // const Icon(
-                                              //   Icons.delete,
-                                              //   color: Colors.grey,
-                                              // ),
-                                              CustomOutlinedButton(
-                                                icon: Icons.delete,
-                                                onPressed: () async =>
-                                                    await _delete(
-                                                  todoService,
-                                                  todoService.tasks[index1].id!,
-                                                ),
+                                            ),
+                                            CustomOutlinedButton(
+                                              icon: Icons.delete_forever_sharp,
+                                              size: 20,
+                                              onPressed: () async =>
+                                                  await _delete(
+                                                todoService,
+                                                todoService.tasks[index1].id!,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -121,7 +120,7 @@ class TodoView extends StatelessWidget {
                                           if (index2 ==
                                               todoService.tasks[index1]
                                                       .contentCount -
-                                                  1)
+                                                  1) ...[
                                             CustomTextButton2(
                                               task: Task(
                                                 content: todoService
@@ -136,6 +135,7 @@ class TodoView extends StatelessWidget {
                                                     .tasks[index1].id!,
                                               ),
                                             ),
+                                          ]
                                         ],
                                       );
                                     },
@@ -157,7 +157,7 @@ class TodoView extends StatelessWidget {
                                     //   description: "Dato estatico",
                                     //   index: index,
                                     // ),
-                                    // SizedBox(height: 15)
+                                    // SizedBox(height: 50)
                                   ],
                                 ),
                               ),

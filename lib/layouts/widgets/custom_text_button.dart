@@ -87,62 +87,63 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
               ),
             ),
           )
-        : Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 5, left: 5),
-                  child: TextFormField(
-                    cursorColor: Colors.black,
-                    autofocus: true,
-                    onEditingComplete: () async =>
-                        await _updateContent(todoService, description),
-                    style: const TextStyle(fontSize: 14),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 12),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1.2,
+        : Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 5, left: 15),
+                    child: TextFormField(
+                      cursorColor: Colors.black,
+                      autofocus: true,
+                      onEditingComplete: () async =>
+                          await _updateContent(todoService, description),
+                      style: const TextStyle(fontSize: 14),
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 12),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 1.2,
+                          ),
                         ),
+                        isCollapsed: true,
                       ),
-                      isCollapsed: true,
+                      onChanged: (value) => description = value,
                     ),
-                    onChanged: (value) => description = value,
                   ),
                 ),
-              ),
-              Tooltip(
-                message: 'Confirmar',
-                waitDuration: const Duration(milliseconds: 800),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(14),
-                  ),
-                  onPressed: () async =>
-                      await _updateContent(todoService, description),
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
+                Tooltip(
+                  message: 'Confirmar',
+                  waitDuration: const Duration(milliseconds: 800),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(14),
+                    ),
+                    onPressed: () async =>
+                        await _updateContent(todoService, description),
+                    child: const Icon(
+                      Icons.done,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
   }
 
   _updateContent(TodoService todoService, String description) async {
+    setState(() => change = false);
     if (description.isNotEmpty) {
-      setState(() => change = false);
-
       widget.task.content.add(
         Content(description: description, isCompleted: false),
       );
+      widget.task.contentCount++;
+      await todoService.updateContentData(widget.task);
     }
-
-    widget.task.contentCount++;
-    await todoService.updateContentData(widget.task);
   }
 }
