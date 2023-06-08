@@ -122,9 +122,17 @@ class TodoService extends ChangeNotifier {
     }
   }
 
-  updateContentCount(String id, int count) async {
-    final url = Uri.https(Constants.baseUrl, '/Todo/$id/contentCount.json');
-    final response = await http.put(url, body: json.encode(count));
-    // print(response.statusCode);
+  updateOnlyTitle(String id, String title) async {
+    final url = Uri.https(Constants.baseUrl, '/Todo/$id/title.json');
+    final response = await http.put(url, body: json.encode(title));
+
+    if (response.statusCode == 200) {
+      tasks = tasks.map((e) {
+        if (e.id != id) return e;
+        e.title = title;
+        return e;
+      }).toList();
+    }
+    notifyListeners();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:notes_app/services/services.dart';
 
 class Routes {
   static const String todo = 'todo';
@@ -27,5 +29,16 @@ class Constants {
     } else {
       return 55;
     }
+  }
+}
+
+class Utility {
+  static void copyToClipboard(String descripcion) {
+    Clipboard.setData(ClipboardData(text: descripcion));
+    NotificationService.showSnackbar(
+      'Copiado al portapapeles',
+      Colors.green,
+      Icons.info_outline,
+    );
   }
 }

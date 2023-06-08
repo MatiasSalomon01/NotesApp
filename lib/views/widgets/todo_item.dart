@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:notes_app/constants/constants.dart';
+import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
@@ -100,14 +101,23 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Editar',
               ),
               IconButton(
-                onPressed: () async => await deleteByContentIndex(
-                    todoService, widget.task, widget.index!),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => WarningModal(
+                        onPressed: () async {
+                          await deleteByContentIndex(
+                              todoService, widget.task, widget.index!);
+                        },
+                        description: widget.description),
+                  );
+                },
                 splashRadius: 20,
                 icon: const Icon(Icons.delete),
                 tooltip: 'Eliminar',
               ),
               IconButton(
-                onPressed: () => _copiarAlPortapeles(widget.description),
+                onPressed: () => Utility.copyToClipboard(widget.description),
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copiar Todo',
@@ -138,11 +148,23 @@ class _TodoItemState extends State<TodoItem> {
             if (!editing) ...[
               PopupMenuButton(
                 splashRadius: 18,
-                padding: const EdgeInsets.all(0),
                 offset: const Offset(0, 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+                onSelected: (value) {
+                  if (value == 'eliminar') {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WarningModal(
+                          onPressed: () async {
+                            await deleteByContentIndex(
+                                todoService, widget.task, widget.index!);
+                          },
+                          description: widget.description),
+                    );
+                  }
+                },
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
@@ -156,8 +178,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () async => deleteByContentIndex(
-                          todoService, widget.task, widget.index!),
+                      value: 'eliminar',
                       child: Row(
                         children: const [
                           Icon(Icons.delete),
@@ -167,7 +188,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () => _copiarAlPortapeles(widget.description),
+                      onTap: () => Utility.copyToClipboard(widget.description),
                       child: Row(
                         children: const [
                           Icon(Icons.copy),
@@ -231,11 +252,5 @@ class _TodoItemState extends State<TodoItem> {
         .where((element) => element.id == widget.task.id)
         .first;
     await todoService.updateOnlyIsCompleted(task, widget.index!, activated);
-  }
-
-  _copiarAlPortapeles(String descripcion) {
-    Clipboard.setData(ClipboardData(text: widget.description));
-    NotificationService.showSnackbar(
-        'Copiado al portapapeles', Colors.green, Icons.info_outline);
   }
 }
