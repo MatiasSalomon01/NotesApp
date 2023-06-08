@@ -243,8 +243,6 @@ class _TodoItemState extends State<TodoItem> {
     if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
           widget.task.id!, widget.index!, widget.description);
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pop();
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
