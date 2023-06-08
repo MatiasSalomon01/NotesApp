@@ -126,19 +126,22 @@ class _TodoItemState extends State<TodoItem> {
               Tooltip(
                 message: 'Confirmar',
                 waitDuration: const Duration(milliseconds: 800),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(14),
-                  ),
-                  onPressed: () async {
+                child: GestureDetector(
+                  onTap: () async {
                     await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 0),
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.green,
+                    ),
+                    child: const Icon(
+                      Icons.done,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -204,19 +207,22 @@ class _TodoItemState extends State<TodoItem> {
               Tooltip(
                 message: 'Confirmar',
                 waitDuration: const Duration(milliseconds: 800),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(10),
-                  ),
-                  onPressed: () async {
+                child: GestureDetector(
+                  onTap: () async {
                     await _updateDescription(todoService, firstDescription);
                     setState(() => editing = false);
                   },
-                  child: const Icon(
-                    Icons.done,
-                    color: Colors.white,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.green,
+                    ),
+                    child: const Icon(
+                      Icons.done,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

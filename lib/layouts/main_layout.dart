@@ -10,14 +10,19 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: const Color(0xffF3F3F3),
-      body: Stack(
-        children: [
-          const _DesktopBody(),
-          if (size.width < 637) const _MobileBody(),
-          if (size.width < 291) const CustomFloatingActionButton(),
-        ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xffF3F3F3),
+        body: Stack(
+          children: [
+            const _DesktopBody(),
+            if (size.width < 637) const _MobileBody(),
+            if (size.width < 291) const CustomFloatingActionButton(),
+          ],
+        ),
       ),
     );
   }

@@ -121,17 +121,20 @@ class _CustomTextButton2State extends State<CustomTextButton2> {
                 Tooltip(
                   message: 'Confirmar',
                   waitDuration: const Duration(milliseconds: 800),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(14),
-                    ),
-                    onPressed: () async =>
+                  child: GestureDetector(
+                    onTap: () async =>
                         await _updateContent(todoService, description),
-                    child: const Icon(
-                      Icons.done,
-                      color: Colors.white,
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 0),
+                      padding: const EdgeInsets.all(5),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                      ),
+                      child: const Icon(
+                        Icons.done,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
