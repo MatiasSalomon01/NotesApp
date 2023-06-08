@@ -44,9 +44,21 @@ class TitleDateItem extends StatelessWidget {
                 onSelected: (value) {
                   if (value == 'editar') {
                     showDialog(
-                        context: context,
-                        builder: (context) =>
-                            TodoEditTitleModal(id: id!, title: title!));
+                      context: context,
+                      builder: (context) =>
+                          TodoEditTitleModal(id: id!, title: title!),
+                    );
+                  }
+                  if (value == 'eliminar') {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WarningModal(
+                        onPressed: () async {
+                          await _delete(todoService, id!);
+                        },
+                        description: 'Eliminar todo',
+                      ),
+                    );
                   }
                 },
                 child: const Icon(Icons.settings),
@@ -63,10 +75,7 @@ class TitleDateItem extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () async => await _delete(
-                        todoService,
-                        id!,
-                      ),
+                      value: 'eliminar',
                       child: Row(
                         children: const [
                           Icon(Icons.delete),
