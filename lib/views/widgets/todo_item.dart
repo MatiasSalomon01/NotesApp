@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
@@ -100,8 +101,17 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Editar',
               ),
               IconButton(
-                onPressed: () async => await deleteByContentIndex(
-                    todoService, widget.task, widget.index!),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => WarningModal(
+                        onPressed: () async {
+                          await deleteByContentIndex(
+                              todoService, widget.task, widget.index!);
+                        },
+                        description: widget.description),
+                  );
+                },
                 splashRadius: 20,
                 icon: const Icon(Icons.delete),
                 tooltip: 'Eliminar',
@@ -143,6 +153,19 @@ class _TodoItemState extends State<TodoItem> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+                onSelected: (value) {
+                  if (value == 'eliminar') {
+                    showDialog(
+                      context: context,
+                      builder: (context) => WarningModal(
+                          onPressed: () async {
+                            await deleteByContentIndex(
+                                todoService, widget.task, widget.index!);
+                          },
+                          description: widget.description),
+                    );
+                  }
+                },
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
@@ -156,8 +179,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () async => deleteByContentIndex(
-                          todoService, widget.task, widget.index!),
+                      value: 'eliminar',
                       child: Row(
                         children: const [
                           Icon(Icons.delete),
@@ -221,6 +243,8 @@ class _TodoItemState extends State<TodoItem> {
     if (firstDescription != widget.description) {
       await todoService.updateOnlyDescription(
           widget.task.id!, widget.index!, widget.description);
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
       NotificationService.showSnackbar(
           'Actualizado con Exito!', Colors.green, Icons.info_outline);
     }
