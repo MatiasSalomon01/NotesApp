@@ -131,7 +131,7 @@ class TodoView extends StatelessWidget {
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 15);
+                            return const SizedBox(height: 10);
                           },
                         ),
                       )
