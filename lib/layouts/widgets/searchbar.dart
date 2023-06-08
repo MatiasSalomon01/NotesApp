@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/services/services.dart';
+import 'package:provider/provider.dart';
 
 class SearchBar extends StatelessWidget {
   final double? width;
@@ -10,6 +12,7 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final platform = Theme.of(context).platform;
+    final todoService = Provider.of<TodoService>(context);
     return Container(
       width: width,
       height:
@@ -22,7 +25,6 @@ class SearchBar extends StatelessWidget {
       ),
       child: TextFormField(
         cursorColor: Colors.black,
-        initialValue: null,
         scrollPadding: const EdgeInsets.all(0),
         decoration: const InputDecoration(
           border: InputBorder.none,
@@ -36,6 +38,15 @@ class SearchBar extends StatelessWidget {
           ),
           hintStyle: TextStyle(color: Colors.grey),
         ),
+        onChanged: (value) {
+          var x = todoService.tasks
+              .where((element) => element.title.startsWith(value))
+              .toList();
+
+          x.forEach((element) {
+            print(element.title);
+          });
+        },
       ),
     );
   }

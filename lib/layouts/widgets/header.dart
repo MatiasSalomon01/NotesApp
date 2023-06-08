@@ -32,6 +32,7 @@ class Header extends StatelessWidget {
             if (size.width > 713.0) ...{
               const SearchBar(width: 400),
             } else ...{
+              // const Expanded(child: SearchButton())
               const Expanded(child: SearchBar())
             },
             if (size.width > 483) ...[
