@@ -38,14 +38,15 @@ class SearchBar extends StatelessWidget {
           ),
           hintStyle: TextStyle(color: Colors.grey),
         ),
-        onChanged: (value) {
-          var x = todoService.tasks
+        onChanged: (value) async {
+          if (value.isEmpty) {
+            await todoService.getAll();
+          }
+          var newTasks = todoService.tasks
               .where((element) => element.title.startsWith(value))
               .toList();
 
-          x.forEach((element) {
-            print(element.title);
-          });
+          await todoService.getAllFiltered(newTasks);
         },
       ),
     );

@@ -135,4 +135,9 @@ class TodoService extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  getAllFiltered(List<Task> newTasks) async {
+    tasks = newTasks;
+    notifyListeners();
+  }
 }
