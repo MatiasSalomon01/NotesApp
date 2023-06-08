@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/layouts/widgets/custom_outlined_button.dart';
+import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
 
@@ -41,11 +41,19 @@ class TitleDateItem extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+                onSelected: (value) {
+                  if (value == 'editar') {
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            TodoEditTitleModal(id: id!, title: title!));
+                  }
+                },
                 child: const Icon(Icons.settings),
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
-                      onTap: () {},
+                      value: 'editar',
                       child: Row(
                         children: const [
                           Icon(Icons.edit_outlined),
