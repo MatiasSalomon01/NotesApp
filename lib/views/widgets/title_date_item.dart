@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/services/services.dart';
 import 'package:provider/provider.dart';
@@ -86,7 +87,7 @@ class TitleDateItem extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () {},
+                      onTap: () => Utility.copyToClipboard("$date $title"),
                       child: Row(
                         children: const [
                           Icon(Icons.copy),

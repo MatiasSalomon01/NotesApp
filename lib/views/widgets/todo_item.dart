@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/modals/modals.dart';
 import 'package:notes_app/models/models.dart';
 import 'package:notes_app/services/services.dart';
@@ -117,7 +117,7 @@ class _TodoItemState extends State<TodoItem> {
                 tooltip: 'Eliminar',
               ),
               IconButton(
-                onPressed: () => _copiarAlPortapeles(widget.description),
+                onPressed: () => Utility.copyToClipboard(widget.description),
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
                 tooltip: 'Copiar Todo',
@@ -188,7 +188,7 @@ class _TodoItemState extends State<TodoItem> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () => _copiarAlPortapeles(widget.description),
+                      onTap: () => Utility.copyToClipboard(widget.description),
                       child: Row(
                         children: const [
                           Icon(Icons.copy),
@@ -252,11 +252,5 @@ class _TodoItemState extends State<TodoItem> {
         .where((element) => element.id == widget.task.id)
         .first;
     await todoService.updateOnlyIsCompleted(task, widget.index!, activated);
-  }
-
-  _copiarAlPortapeles(String descripcion) {
-    Clipboard.setData(ClipboardData(text: widget.description));
-    NotificationService.showSnackbar(
-        'Copiado al portapapeles', Colors.green, Icons.info_outline);
   }
 }
