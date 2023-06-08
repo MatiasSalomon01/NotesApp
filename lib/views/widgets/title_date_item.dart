@@ -53,10 +53,8 @@ class TitleDateItem extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) => WarningModal(
-                        onPressed: () async {
-                          await _delete(todoService, id!);
-                        },
-                        description: 'Eliminar todo',
+                        onPressed: () async => await _delete(todoService, id!),
+                        description: 'todo',
                       ),
                     );
                   }
