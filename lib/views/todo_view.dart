@@ -28,7 +28,7 @@ class TodoView extends StatelessWidget {
                 : todoService.tasks.isNotEmpty
                     ? Expanded(
                         child: ListView.separated(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 5),
                           physics: const BouncingScrollPhysics(
                             decelerationRate: ScrollDecelerationRate.fast,
                           ),
@@ -38,7 +38,6 @@ class TodoView extends StatelessWidget {
                             return Column(
                               children: [
                                 Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Icon(
                                       Icons.commit_outlined,

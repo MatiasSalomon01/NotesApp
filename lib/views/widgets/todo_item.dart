@@ -148,7 +148,6 @@ class _TodoItemState extends State<TodoItem> {
             if (!editing) ...[
               PopupMenuButton(
                 splashRadius: 18,
-                padding: const EdgeInsets.all(0),
                 offset: const Offset(0, 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),

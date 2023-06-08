@@ -18,7 +18,7 @@ class TitleDateItem extends StatelessWidget {
         message: title,
         waitDuration: const Duration(milliseconds: 800),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Text(
@@ -33,13 +33,17 @@ class TitleDateItem extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 10, right: 13),
+              margin: const EdgeInsets.only(right: 5),
               child: PopupMenuButton(
-                splashRadius: 20,
-                padding: const EdgeInsets.all(0),
+                splashRadius: 18,
                 offset: const Offset(0, 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
+                ),
+                tooltip: '',
+                icon: const Icon(
+                  Icons.settings,
+                  size: 22,
                 ),
                 onSelected: (value) {
                   if (value == 'editar') {
@@ -59,7 +63,6 @@ class TitleDateItem extends StatelessWidget {
                     );
                   }
                 },
-                child: const Icon(Icons.settings),
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(

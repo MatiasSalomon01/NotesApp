@@ -14,7 +14,7 @@ class WarningModal extends StatelessWidget {
         children: [
           const Icon(Icons.warning_rounded, color: Colors.red),
           const SizedBox(width: 10),
-          Text('Seguro que quieres eliminar $description?'),
+          Expanded(child: Text('Seguro que quieres eliminar $description?')),
         ],
       ),
       actions: [
