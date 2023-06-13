@@ -41,14 +41,16 @@ class SearchBar extends StatelessWidget {
         onChanged: (value) async {
           if (value.isEmpty) {
             await todoService.getAllFiltered(todoService.tasksCopy);
+            return;
           }
+
           var newTasks = todoService.tasks
               .where((element) => element.title.startsWith(value))
               .toList();
-          if (newTasks.isEmpty) {
-            todoService.isEmptyText = 'No hay tareas que empiecen con $value';
+
+          if (newTasks.isNotEmpty) {
+            await todoService.getAllFiltered(newTasks);
           }
-          await todoService.getAllFiltered(newTasks);
         },
       ),
     );
