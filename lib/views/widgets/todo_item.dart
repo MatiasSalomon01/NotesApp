@@ -98,7 +98,6 @@ class _TodoItemState extends State<TodoItem> {
                 onPressed: () => setState(() => editing = true),
                 splashRadius: 20,
                 icon: const Icon(Icons.edit_outlined),
-                tooltip: 'Editar',
               ),
               IconButton(
                 onPressed: () {
@@ -114,13 +113,11 @@ class _TodoItemState extends State<TodoItem> {
                 },
                 splashRadius: 20,
                 icon: const Icon(Icons.delete),
-                tooltip: 'Eliminar',
               ),
               IconButton(
                 onPressed: () => Utility.copyToClipboard(widget.description),
                 splashRadius: 20,
                 icon: const Icon(Icons.copy),
-                tooltip: 'Copiar Todo',
               ),
             ] else ...[
               Tooltip(
@@ -150,6 +147,7 @@ class _TodoItemState extends State<TodoItem> {
           ] else ...[
             if (!editing) ...[
               PopupMenuButton(
+                tooltip: '',
                 splashRadius: 18,
                 offset: const Offset(0, 40),
                 shape: RoundedRectangleBorder(
@@ -160,11 +158,12 @@ class _TodoItemState extends State<TodoItem> {
                     showDialog(
                       context: context,
                       builder: (context) => WarningModal(
-                          onPressed: () async {
-                            await deleteByContentIndex(
-                                todoService, widget.task, widget.index!);
-                          },
-                          description: widget.description),
+                        onPressed: () async {
+                          await deleteByContentIndex(
+                              todoService, widget.task, widget.index!);
+                        },
+                        description: widget.description,
+                      ),
                     );
                   }
                 },

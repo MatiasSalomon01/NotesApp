@@ -135,11 +135,11 @@ class TodoView extends StatelessWidget {
                           },
                         ),
                       )
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 10),
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          'No hay nada por hacer...',
-                          style: TextStyle(fontSize: 20),
+                          todoService.isEmptyText,
+                          style: const TextStyle(fontSize: 20),
                         ),
                       ),
           ],

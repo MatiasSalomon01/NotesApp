@@ -7,14 +7,18 @@ import 'package:notes_app/models/models.dart';
 
 class TodoService extends ChangeNotifier {
   List<Task> tasks = [];
+  late List<Task> tasksCopy;
   bool isLoading = false;
 
   Map<int, String> indexMap = {};
 
   List<dynamic> data = [];
 
+  String isEmptyText = 'No hay nada por hacer...';
+
   TodoService() {
     getAll();
+    tasksCopy = tasks;
   }
 
   getAll() async {
@@ -133,6 +137,11 @@ class TodoService extends ChangeNotifier {
         return e;
       }).toList();
     }
+    notifyListeners();
+  }
+
+  getAllFiltered(List<Task> newTasks) async {
+    tasks = newTasks;
     notifyListeners();
   }
 }
