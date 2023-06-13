@@ -158,11 +158,12 @@ class _TodoItemState extends State<TodoItem> {
                     showDialog(
                       context: context,
                       builder: (context) => WarningModal(
-                          onPressed: () async {
-                            await deleteByContentIndex(
-                                todoService, widget.task, widget.index!);
-                          },
-                          description: widget.description),
+                        onPressed: () async {
+                          await deleteByContentIndex(
+                              todoService, widget.task, widget.index!);
+                        },
+                        description: widget.description,
+                      ),
                     );
                   }
                 },
