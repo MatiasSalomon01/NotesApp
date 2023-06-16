@@ -5,8 +5,36 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
-      child: Text('En contrucción'),
+    return Expanded(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.edit),
+              Icon(Icons.format_bold_outlined),
+              Icon(Icons.format_italic),
+              Icon(Icons.format_underline_outlined),
+            ],
+          ),
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              children: [
+                TextFormField(
+                  maxLines: null,
+                  cursorColor: Colors.black,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
