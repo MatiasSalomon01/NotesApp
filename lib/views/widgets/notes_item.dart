@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/models/models.dart';
+import 'package:notes_app/views/widgets/notes_content.dart';
 
 class NotesItem extends StatelessWidget {
   final Notes note;
@@ -8,7 +9,19 @@ class NotesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: const Dialog(
+                child: NotesContent(),
+              ),
+            );
+          },
+        );
+      },
       child: Container(
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),

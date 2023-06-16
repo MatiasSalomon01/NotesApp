@@ -5,7 +5,8 @@ class NotesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 1000),
       child: Column(
         children: [
           Padding(
@@ -16,20 +17,20 @@ class NotesContent extends StatelessWidget {
                   'Titulo de la Nota',
                   style: TextStyle(fontSize: 22),
                 ),
-                Spacer(),
-                Icon(Icons.edit),
-                Icon(Icons.format_bold_outlined),
-                Icon(Icons.format_italic),
-                Icon(Icons.format_underline_outlined),
-                Icon(Icons.format_align_left_outlined),
-                Icon(Icons.format_align_center_outlined),
-                Icon(Icons.format_align_right_outlined),
-                Icon(Icons.format_align_justify_outlined),
-                Icon(Icons.text_increase),
-                Icon(Icons.text_decrease),
-                Icon(Icons.format_list_bulleted_sharp),
-                Icon(Icons.copy_all),
-                Icon(Icons.share),
+                // Spacer(),
+                // Icon(Icons.edit),
+                // Icon(Icons.format_bold_outlined),
+                // Icon(Icons.format_italic),
+                // Icon(Icons.format_underline_outlined),
+                // Icon(Icons.format_align_left_outlined),
+                // Icon(Icons.format_align_center_outlined),
+                // Icon(Icons.format_align_right_outlined),
+                // Icon(Icons.format_align_justify_outlined),
+                // Icon(Icons.text_increase),
+                // Icon(Icons.text_decrease),
+                // Icon(Icons.format_list_bulleted_sharp),
+                // Icon(Icons.copy_all),
+                // Icon(Icons.share),
               ],
             ),
           ),
