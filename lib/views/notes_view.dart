@@ -8,14 +8,33 @@ class NotesView extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.edit),
-              Icon(Icons.format_bold_outlined),
-              Icon(Icons.format_italic),
-              Icon(Icons.format_underline_outlined),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            child: Row(
+              children: const [
+                Text(
+                  'Titulo de la Nota',
+                  style: TextStyle(fontSize: 22),
+                ),
+                Spacer(),
+                Icon(Icons.edit),
+                Icon(Icons.format_bold_outlined),
+                Icon(Icons.format_italic),
+                Icon(Icons.format_underline_outlined),
+                Icon(Icons.format_align_left_outlined),
+                Icon(Icons.format_align_center_outlined),
+                Icon(Icons.format_align_right_outlined),
+                Icon(Icons.format_align_justify_outlined),
+                Icon(Icons.text_increase),
+                Icon(Icons.text_decrease),
+                Icon(Icons.format_list_bulleted_sharp),
+                Icon(Icons.copy_all),
+                Icon(Icons.share),
+              ],
+            ),
+          ),
+          const Divider(
+            thickness: 2,
           ),
           Expanded(
             child: ListView(
@@ -24,6 +43,7 @@ class NotesView extends StatelessWidget {
               children: [
                 TextFormField(
                   maxLines: null,
+                  initialValue: 'Contenido',
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
