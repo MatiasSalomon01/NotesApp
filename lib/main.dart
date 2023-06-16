@@ -19,6 +19,9 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => TodoService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotesService(),
         )
       ],
       child: const MyApp(),
