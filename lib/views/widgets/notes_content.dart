@@ -17,7 +17,7 @@ class NotesContent extends StatelessWidget {
                   'Titulo de la Nota',
                   style: TextStyle(fontSize: 22),
                 ),
-                // Spacer(),
+                // fgfdgfdgdfg,
                 // Icon(Icons.edit),
                 // Icon(Icons.format_bold_outlined),
                 // Icon(Icons.format_italic),
