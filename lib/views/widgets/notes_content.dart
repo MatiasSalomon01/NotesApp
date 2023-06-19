@@ -18,6 +18,7 @@ class NotesContent extends StatelessWidget {
                   style: TextStyle(fontSize: 22),
                 ),
                 // fgfdgfdgdfg,
+                // Divider(),
                 // Icon(Icons.edit),
                 // Icon(Icons.format_bold_outlined),
                 // Icon(Icons.format_italic),
