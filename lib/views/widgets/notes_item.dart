@@ -15,6 +15,7 @@ class _NotesItemState extends State<NotesItem> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (event) => setState(() => isHover = true),
       onExit: (event) => setState(() => isHover = false),
       child: GestureDetector(
@@ -22,11 +23,9 @@ class _NotesItemState extends State<NotesItem> {
           showDialog(
             context: context,
             builder: (context) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: const Dialog(
-                  child: NotesContent(),
-                ),
+              return Dialog(
+                backgroundColor: Colors.transparent,
+                child: NotesContent(note: widget.note),
               );
             },
           );
@@ -67,6 +66,7 @@ class _NotesItemState extends State<NotesItem> {
                         ),
                       ),
                       PopupMenuButton(
+                        color: Color(widget.note.color),
                         tooltip: '',
                         offset: const Offset(0, 30),
                         shape: RoundedRectangleBorder(
